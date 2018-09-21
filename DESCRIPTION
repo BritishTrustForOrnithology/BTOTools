@@ -1,10 +1,10 @@
-Package: birdatlas
+Package: BTOTools
 Type: Package
-Title: A Package To Access and Manipulate Bird Atlas data
-Version: 0.1.1
+Title: A Package To Access and Manipulate BTO data
+Version: 0.1.0
 Author: Simon Gillings <simon.gillings@bto.org>
 Maintainer: Simon Gillings <simon.gillings@bto.org>
-Description: Access and manipulate archived BTO bird atlas data files.
+Description: Access and manipulate archived BTO data.
 License: 
 Depends: R (>= 3.1.0)
 Encoding: UTF-8
