@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Simon Gillings <simon.gillings@bto.org>
 Maintainer: Simon Gillings <simon.gillings@bto.org>
 Description: Access and manipulate archived BTO data.
-License: 
+License: GPL-2
 Depends: R (>= 3.1.0)
 Encoding: UTF-8
 LazyData: true
