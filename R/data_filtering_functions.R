@@ -11,13 +11,13 @@
 #' @return A dataframe in same format as the input dataset.
 #'
 #' @examples
-#' distrib2010.noseabirds<-exclude_seabirds(distrib2010,'speccode')
+#' distrib2010.noseabirds <- exclude_seabirds(distrib2010, 'speccode')
 #'
 #' @export
 #'
 exclude_seabirds<-function(df,var2use) {
-  if(var2use=='speccode') df<-subset(df, !speccode %in% c(12,18,22,23,25,26,27,222,224,242,232,226,235,229,234,236,237,1282,1283,238,239,240,256,258,248,250,251,249,260,262,264,266))
-  if(var2use=='cbc_code') df<-subset(df, !cbc_code %in% c('F.','MX','TM','TL','GX','CA','SA','AC','NX','KI','BH','MU','CM','LU','IN','LB','HG','YG','YC','IG','GZ','GB','AF','BJ','TE','CN','AE','RS','GU','RA','TY','PU','F_'))
+  if(var2use=='speccode') df <- subset(df, !speccode %in% c(12,18,22,23,25,26,27,222,224,242,232,226,235,229,234,236,237,1282,1283,238,239,240,256,258,248,250,251,249,260,262,264,266))
+  if(var2use=='cbc_code') df <- subset(df, !cbc_code %in% c('F.','MX','TM','TL','GX','CA','SA','AC','NX','KI','BH','MU','CM','LU','IN','LB','HG','YG','YC','IG','GZ','GB','AF','BJ','TE','CN','AE','RS','GU','RA','TY','PU','F_'))
   return(df)
 }
 
@@ -33,12 +33,12 @@ exclude_seabirds<-function(df,var2use) {
 #' @return A dataframe in same format as the input dataset.
 #'
 #' @examples
-#' distrib2010.truespecsonly<-exclude_hybrids(distrib2010)
+#' distrib2010.truespecsonly <- exclude_hybrids(distrib2010)
 #'
 #' @export
 #'
-exclude_hybrids<-function(df) {
-  df<-subset(df, !speccode %in% c(873,874,875,876,911,1021,1053,1152,1165,1247,1278,1279))
+exclude_hybrids <- function(df) {
+  df <- subset(df, !speccode %in% c(873,874,875,876,911,1021,1053,1152,1165,1247,1278,1279))
   return(df)
 }
 
@@ -47,8 +47,10 @@ exclude_hybrids<-function(df) {
 #' Limit a dataframe to the chequerboard in Ireland
 #'
 #' @description
-#' For some analyses it may be necessary to remove the 10-km squares in Ireland that were not on the
-#' chequerboard and hence did not achieve the minimum TTV coverage.
+#' For some Atlas analyses it may be necessary to remove the 10-km squares in 
+#' Ireland that were not on the chequerboard and hence did not achieve the 
+#' minimum TTV coverage. The 10-km squares to remove are all those where the
+#' easting and northing sum to an odd  number.
 #'
 #' @param df name of input dataframe
 #'
@@ -70,9 +72,11 @@ limit2chequerboard_ireland<-function(df) {
 #' Limit a dataframe to the chequerboard in Britain
 #'
 #' @description
-#' For some analyses it may be necessary to impose the chequerboard approach onto Britain (even though
-#' all 10-km squares were actually targetted there).
-#'
+#' For some Atlas analyses it may be necessary to impose the chequerboard 
+#' approach onto Britain (even though all 10-km squares were actually 
+#' targetted there). The 10-km squares to remove are all those where the
+#' easting and northing sum to an odd  number.
+#' 
 #' @param df name of input dataframe
 #'
 #' @return A dataframe in same format as the input dataset.
