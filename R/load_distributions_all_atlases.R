@@ -1,0 +1,33 @@
+#' Load 10-km distribution data for all breeding and wintering atlases
+#'
+#' @description
+#' Summarised distribution data from all breeding and wintering atlases. For
+#' the 2008-11 breeding data, out of season records were excluded in the calculation of
+#' breeding evidence to allow comparability with previous atlases. Similarly, early winter
+#' records were omitted when calculating status for 2007/08-2010/11 to allow comparability
+#' with the previous winter atlas. It is still necessary to use coverage information to identify which
+#' 10-km squares were surveyed in different atlases in order to generate valid changes.
+#' Data are all at 10-km resolution and as such give confidential locations for some
+#' rare breeding species. These data can be used to replicate distribution maps or for
+#' analyses.
+#'
+#' @return A dataframe with the following columns:
+#' \item{tenkm}{10-km grid reference}
+#' \item{speccode}{numeric species code}
+#' \item{cat70}{numeric code indicating highest recorded 1968-72 breeding status. 1 = Possible breeding, 2 = Probable breeding, 3 = Confirmed breeding}
+#' \item{cat80}{numeric code indicating presence in 1980s Winter Atlas. 3 = present}
+#' \item{cat90}{numeric code indicating highest recorded 1988-91 breeding status. 1 = seen, 3 = Breeding}
+#' \item{cat2010b}{numeric code indicating highest recorded 2008-11 breeding status. 1 = Possible breeding, 2 = Probable breeding, 3 = Confirmed breeding.}
+#' \item{cat2010w}{numeric code indicating presence in 2007/08-2010/11 winter atlas. 3 = Present}
+#'
+#' @examples
+#' df<-load_distributions_all_atlases()
+#'
+#' @export
+#'
+load_distributions_all_atlases<-function() {
+  df<-read.table(paste0(.BTOarchive_path,'birdatlas2007-11/data/processed/allmaxcats4change.csv'),
+                   header=T,sep=",",
+                   colClasses=c('character',rep('numeric',6)))
+  return(df)
+}
