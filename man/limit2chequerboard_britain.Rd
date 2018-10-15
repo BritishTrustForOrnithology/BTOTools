@@ -13,8 +13,10 @@ limit2chequerboard_britain(df)
 A dataframe in same format as the input dataset.
 }
 \description{
-For some analyses it may be necessary to impose the chequerboard approach onto Britain (even though
-all 10-km squares were actually targetted there).
+For some Atlas analyses it may be necessary to impose the chequerboard 
+approach onto Britain (even though all 10-km squares were actually 
+targetted there). The 10-km squares to remove are all those where the
+easting and northing sum to an odd  number.
 }
 \examples{
 df<-limit2chequerboard_britain(irish.ttvs)

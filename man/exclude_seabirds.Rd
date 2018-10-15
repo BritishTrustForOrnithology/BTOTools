@@ -18,6 +18,6 @@ A dataframe in same format as the input dataset.
 Remove colonial seabirds from a dataframe using either speccode or cbc_code variable.
 }
 \examples{
-distrib2010.noseabirds<-exclude_seabirds(distrib2010,'speccode')
+distrib2010.noseabirds <- exclude_seabirds(distrib2010, 'speccode')
 
 }

@@ -17,6 +17,6 @@ Remove subspecies, hybrids and domestic forms from a dataframe. As some of these
 cbc_code this can only be done using numeric speccode variable.
 }
 \examples{
-distrib2010.truespecsonly<-exclude_hybrids(distrib2010)
+distrib2010.truespecsonly <- exclude_hybrids(distrib2010)
 
 }
