@@ -13,8 +13,10 @@ limit2chequerboard_ireland(df)
 A dataframe in same format as the input dataset.
 }
 \description{
-For some analyses it may be necessary to remove the 10-km squares in Ireland that were not on the
-chequerboard and hence did not achieve the minimum TTV coverage.
+For some Atlas analyses it may be necessary to remove the 10-km squares in 
+Ireland that were not on the chequerboard and hence did not achieve the 
+minimum TTV coverage. The 10-km squares to remove are all those where the
+easting and northing sum to an odd  number.
 }
 \examples{
 df<-limit2chequerboard_ireland(irish.ttvs)

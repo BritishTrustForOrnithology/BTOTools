@@ -6,6 +6,9 @@
 \usage{
 load_coords(res)
 }
+\arguments{
+\item{res}{numeric resolution of the coordinates required: 2, 10, 20, 50 or 100}
+}
 \value{
 A dataframe with the following columns:
 \item{tenkm}{10-km square, or tetrad_id, segref, quadref, hundref depending on chosen grid resolution}
