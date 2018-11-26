@@ -19,6 +19,10 @@
 #' @export
 #'
 rescale_1km_to_2km<-function(df,invar) {
+  #check input parameters
+  if(!is.character(df)) stop('df must be supplied as a character string')
+  if(!is.character(invar)) stop('invar must be supplied as a character string')
+  
   #which column to process
   invar.index<-which(names(df)== invar)
   #force name to be gridref to make easier processing
