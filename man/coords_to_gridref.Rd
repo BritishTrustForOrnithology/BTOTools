@@ -25,7 +25,5 @@ reference of desired resolution. Note this only works for locations in Great Bri
 temp<-data.frame(cbc_code='R.',count=10,easting=552713.37,northing=292678.498)
 temp2<-coords_to_gridref(temp,2,'tetrad_id')
 print(temp2)
-cbc_code count  easting northing tetrad_id
-      R.    10 552713.4 292678.5     TL59G
 
 }
