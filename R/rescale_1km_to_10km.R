@@ -10,16 +10,32 @@
 #' @return The same dataframe with additional tenkm column
 #'
 #' @examples
-#' temp<-data.frame(cbc_code='R.',count=10,onekm='TL1234')
-#' temp2<-rescale_1km_to_10km(temp,'onekm')
-#' print(temp2)
-#' cbc_code count  onekm tenkm
-#'       R.    10 TL1234  TL13
+#' temp1<-data.frame(cbc_code='R.',count=10,onekm='TL1234', stringsAsFactors = FALSE)
+#' temp1a<-rescale_1km_to_10km(temp1,'onekm')
+#' temp2<-data.frame(cbc_code='R.',count=10,onekm='TL123', stringsAsFactors = FALSE)
+#' temp2a<-rescale_1km_to_10km(temp2,'onekm')
+#' temp3<-data.frame(cbc_code='R.',count=10,onekm='TL12345', stringsAsFactors = FALSE)
+#' temp3a<-rescale_1km_to_10km(temp3,'onekm')
 #'
 #' @export
 #'
 rescale_1km_to_10km<-function(df,invar) {
+  #check input parameters
+  if(!is.data.frame(df)) stop('df must be a data frame')
+  if(!is.character(invar)) stop('invar must be supplied as a character string')
+
+  #check there isn't already a tenkm column
+  if('tenkm' %in% names(df)) stop('df already contains a column called tenkm')
+    
   invar.index<-which(names(df)== invar)
+  
+  #check if any values in the column are not 1-km refs
+  nc <- nchar(df[,invar.index])
+  short <- min(nc, na.rm = TRUE)
+  long <- max(nc, na.rm = TRUE)
+  if(short < 6) stop('invar contains grid references that are too short')
+  if(long > 6) stop('invar contains grid references that are too long')
+  
   df$tenkm<-paste(substr(df[,invar.index],1,3),substr(df[,invar.index],5,5),sep=''  )
   return(df)
 }
