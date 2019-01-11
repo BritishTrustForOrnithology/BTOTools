@@ -16,7 +16,6 @@
 #' temp2a<-rescale_1km_to_2km(temp2,'onekm')
 #' temp3<-data.frame(cbc_code='R.',count=10,onekm='TL12345', stringsAsFactors = FALSE)
 #' temp3a<-rescale_1km_to_2km(temp3,'onekm')
-#' print(temp2)
 #'
 #' @export
 #'

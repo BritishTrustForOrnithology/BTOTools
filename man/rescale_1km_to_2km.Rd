@@ -19,10 +19,11 @@ Takes a dataframe of British National grid 1-km references and converts to 2-km 
 (i.e. tetrads). Works for Britain, Ireland and Channel Isles grids
 }
 \examples{
-temp<-data.frame(cbc_code='R.',count=10,onekm='TL1234')
-temp2<-rescale_1km_to_2km(temp,'onekm')
-print(temp2)
-cbc_code count  onekm tetrad_id
-      R.    10 TL1234    TL13H
+temp1<-data.frame(cbc_code='R.',count=10,onekm='TL1234', stringsAsFactors = FALSE)
+temp1a<-rescale_1km_to_2km(temp1,'onekm')
+temp2<-data.frame(cbc_code='R.',count=10,onekm='TL123', stringsAsFactors = FALSE)
+temp2a<-rescale_1km_to_2km(temp2,'onekm')
+temp3<-data.frame(cbc_code='R.',count=10,onekm='TL12345', stringsAsFactors = FALSE)
+temp3a<-rescale_1km_to_2km(temp3,'onekm')
 
 }

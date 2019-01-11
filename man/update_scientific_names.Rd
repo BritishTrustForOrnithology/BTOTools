@@ -18,11 +18,14 @@ A dataframe
 The function does not perform taxonomic changes such as splits and lumps. All it does is change 
 names where there have been spelling changes (e.g. montanus to montana), or where genus names 
 have changed (e.g. Parus to Periparus). It uses a lookup table of species synonyms which is 
-available within the package and will be updated periodically.
+available within the package and will be updated periodically (see See Also).
 }
 \examples{
-old_records <- data.frame(sciname = c('Apus apus', 'Parus ater'), engname = c('Swift', 'Coal Tit'), stringsAsFactors = FALSE)
-old_records_updated <- update_scientific_names(df = old_records, var = 'sciname')
+old_records <- data.frame(sciname = c('Apus apus', 'Parus ater'), 
+                          engname = c('Swift', 'Coal Tit'), 
+                          stringsAsFactors = FALSE)
+old_records_updated <- update_scientific_names(df = old_records, 
+                                               var = 'sciname')
 
 }
 \seealso{
