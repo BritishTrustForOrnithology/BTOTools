@@ -51,7 +51,8 @@ update_scientific_names <- function(df, var, report_changes=FALSE) {
   
   #optional reporting
   if(report_changes == TRUE) {
-    print(setNames(aggregate(data = temp, unit ~ scinameworking + scinameworking2, NROW), c('from', 'to', 'num_rows')))
+    optout <- subset(df, !is.na(scinameworking2))
+    print(setNames(aggregate(data = optout, unit ~ scinameworking + scinameworking2, NROW), c('from', 'to', 'num_rows')))
   }
   
   #copy across the unchanged scinames
