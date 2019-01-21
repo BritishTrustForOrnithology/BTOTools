@@ -9,7 +9,6 @@
   \item{numeric}{Numeric taxon key code}
   \item{character}{Formerly used scientific name}
   \item{character}{Currently used scientific name}
-  \item{numeric}{Species sort order}
 }}
 \description{
 A list of previously used scientific names and their currently used synonym, to assist in updating taxonomy 

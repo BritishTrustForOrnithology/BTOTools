@@ -30,7 +30,6 @@ NULL
 #'   \item{numeric}{Numeric taxon key code}
 #'   \item{character}{Formerly used scientific name}
 #'   \item{character}{Currently used scientific name}
-#'   \item{numeric}{Species sort order}
 #' }
 #' @keywords data
 NULL
