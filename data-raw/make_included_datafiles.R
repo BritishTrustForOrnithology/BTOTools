@@ -4,10 +4,17 @@ library(devtools)
 #' read the old scientific names with their matched new names
 sciname_synonyms <- read.csv('data-raw/sci_name_synonyms.csv', colClasses = c('numeric','character','character','numeric'), encoding = 'latin1')
 names(sciname_synonyms) <- tolower(names(sciname_synonyms))
+sciname_synonyms$sort_order_ioc <- NULL
 
 #remove a couple of NA type values
 sciname_synonyms <- subset(sciname_synonyms, master_taxon_id != 0)
 sciname_synonyms <- subset(sciname_synonyms, alternative_sci_name != 'n/a')
+
+#add a couple of manual entries (use list instead of c to prevent class changes)
+sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(23, 'Hydrobates leucorhous', 'Oceanodroma leucorhoa')
+sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(433, 'Parus montanus', 'Poecile montanus')
+sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(436, 'Parus caeruleus', 'Cyanistes caeruleus')
+sciname_synonyms <- sciname_synonyms[order(sciname_synonyms$master_taxon_id),]
 
 #output
 use_data(sciname_synonyms, overwrite = TRUE)
