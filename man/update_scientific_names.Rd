@@ -4,21 +4,27 @@
 \alias{update_scientific_names}
 \title{Update species' scientific names}
 \usage{
-update_scientific_names(df, var)
+update_scientific_names(df, var, report_changes = FALSE)
 }
 \arguments{
 \item{df}{character The name of the dataset to be scanned for name updates}
 
 \item{var}{character A quoted string. The name of the column in df to be scanned for name updates}
+
+\item{report_changes}{logical Should the list of names changed be displayed on execution (default FALSE)}
 }
 \value{
-A dataframe
+A dataframe.
 }
 \description{
 The function does not perform taxonomic changes such as splits and lumps. All it does is change 
 names where there have been spelling changes (e.g. montanus to montana), or where genus names 
 have changed (e.g. Parus to Periparus). It uses a lookup table of species synonyms which is 
 available within the package and will be updated periodically (see See Also).
+}
+\details{
+If \code{report_changes=TRUE} the list of cases changed is printed to output, showing original
+name (from), destination name (to) and the number of rows affected.
 }
 \examples{
 old_records <- data.frame(sciname = c('Apus apus', 'Parus ater'), 
