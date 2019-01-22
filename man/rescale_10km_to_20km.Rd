@@ -19,11 +19,7 @@ Takes a dataframe of British National grid 10-km references and converts to 20-k
 Works for Britain, Ireland and Channel Isles grids
 }
 \examples{
-temp1<-data.frame(cbc_code = 'R.', count = 10, tenkm = 'TL13', stringsAsFactors = FALSE)
-temp1a<-rescale_10km_to_20km(temp1,'tenkm')
-temp2<-data.frame(cbc_code = 'R.', count = 10, tenkm = 'TL1', stringsAsFactors = FALSE)
-temp2a<-rescale_10km_to_20km(temp2,'tenkm')
-temp3<-data.frame(cbc_code = 'R.', count = 10, tenkm = 'TL1234', stringsAsFactors = FALSE)
-temp3a<-rescale_10km_to_20km(temp3,'tenkm')
+temp1<-data.frame(cbc_code = c('R.','CH'), count = c(10,2), tenkm = c('TL13', 'SK87'), stringsAsFactors = FALSE)
+rescale_10km_to_20km(temp1,'tenkm')
 
 }

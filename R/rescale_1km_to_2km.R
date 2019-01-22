@@ -11,11 +11,7 @@
 #'
 #' @examples
 #' temp1<-data.frame(cbc_code='R.',count=10,onekm='TL1234', stringsAsFactors = FALSE)
-#' temp1a<-rescale_1km_to_2km(temp1,'onekm')
-#' temp2<-data.frame(cbc_code='R.',count=10,onekm='TL123', stringsAsFactors = FALSE)
-#' temp2a<-rescale_1km_to_2km(temp2,'onekm')
-#' temp3<-data.frame(cbc_code='R.',count=10,onekm='TL12345', stringsAsFactors = FALSE)
-#' temp3a<-rescale_1km_to_2km(temp3,'onekm')
+#' rescale_1km_to_2km(temp1,'onekm')
 #'
 #' @export
 #'
@@ -27,11 +23,8 @@ rescale_1km_to_2km<-function(df,invar) {
   #check there isn't already a tetrad_id column
   if('tetrad_id' %in% names(df)) stop('df already contains a column called tetrad_id')
   
-  #which column to process
-  invar_index<-which(names(df)== invar)
-
   #copy to new df for processing so as not to overwrite any columns in original df
-  temp_df <- df[invar_index]
+  temp_df <- df[invar]
     
   #force name to be gridref to make easier processing
   names(temp_df)<-'gridref'

@@ -20,10 +20,6 @@ Works for Britain, Ireland and Channel Isles grids
 }
 \examples{
 temp1<-data.frame(cbc_code='R.',count=10,onekm='TL1234', stringsAsFactors = FALSE)
-temp1a<-rescale_1km_to_10km(temp1,'onekm')
-temp2<-data.frame(cbc_code='R.',count=10,onekm='TL123', stringsAsFactors = FALSE)
-temp2a<-rescale_1km_to_10km(temp2,'onekm')
-temp3<-data.frame(cbc_code='R.',count=10,onekm='TL12345', stringsAsFactors = FALSE)
-temp3a<-rescale_1km_to_10km(temp3,'onekm')
+rescale_1km_to_10km(temp1,'onekm')
 
 }

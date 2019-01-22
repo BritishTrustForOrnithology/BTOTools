@@ -11,11 +11,7 @@
 #'
 #' @examples
 #' temp1<-data.frame(cbc_code = 'R.', count = 10, tenkm = 'TL13', stringsAsFactors = FALSE)
-#' temp1a<-rescale_10km_to_50km(temp1,'tenkm')
-#' temp2<-data.frame(cbc_code = 'R.', count = 10, tenkm = 'TL1', stringsAsFactors = FALSE)
-#' temp2a<-rescale_10km_to_50km(temp2,'tenkm')
-#' temp3<-data.frame(cbc_code = 'R.', count = 10, tenkm = 'TL1234', stringsAsFactors = FALSE)
-#' temp3a<-rescale_10km_to_50km(temp3,'tenkm')
+#' rescale_10km_to_50km(temp1,'tenkm')
 #'
 #' @export
 #'
@@ -27,11 +23,8 @@ rescale_10km_to_50km<-function(df,invar) {
   #check there isn't already a quadref column
   if('quadref' %in% names(df)) stop('df already contains a column called quadref')
   
-  #which column to process
-  invar_index<-which(names(df)== invar)
-  
   #copy to new df for processing so as not to overwrite any columns in original df
-  temp_df <- df[invar_index]
+  temp_df <- df[invar]
   
   #force name to be tenkm to make easier processing
   names(temp_df)<-'tenkm'
