@@ -34,3 +34,25 @@ global_species_lookup$cbc_code <- ifelse(global_species_lookup$cbc_code == '', N
 
 #output
 use_data(global_species_lookup, overwrite = TRUE)
+
+#' make coordinates datasets
+centroids002 <- read.table('data-raw/002km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "character", "numeric", "numeric"))
+centroids002$country <- NULL
+centroids010 <- read.table('data-raw/010km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "numeric", "numeric"))
+centroids020 <- read.table('data-raw/020km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "numeric", "numeric"))
+names(centroids020)[1] <- 'segref'
+centroids050 <- read.table('data-raw/050km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "numeric", "numeric"))
+centroids100 <- read.table('data-raw/100km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "numeric", "numeric"))
+names(centroids100)[1] <- 'hundref'
+#output
+use_data(centroids002, overwrite = TRUE)
+use_data(centroids010, overwrite = TRUE)
+use_data(centroids020, overwrite = TRUE)
+use_data(centroids050, overwrite = TRUE)
+use_data(centroids100, overwrite = TRUE)
+
+
+#' make land area dataset
+landarea010 <- read.table('data-raw/BI010_area_above_low_tide_line.csv', sep = ",", header = T, colClasses = c("character", "numeric"))
+use_data(landarea010, overwrite = TRUE)
+
