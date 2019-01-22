@@ -1,2 +1,2 @@
 # BTOTools
-A package for accessing and manipulating BTO datasets
+A package for manipulating BTO datasets
