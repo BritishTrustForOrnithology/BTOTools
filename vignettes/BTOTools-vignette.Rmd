@@ -1,0 +1,49 @@
+---
+title: "BTOTools"
+author: "Simon Gillings"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{BTOTools}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This package aims to provide some simple utilities for working with BTO data. It includes several functions and in-built datasets. The following is a brief explanation of the main areas covered by this so far.
+
+## Working with species
+
+The package includes two reference datasets for working with species names. A global species dictionary based on the latest version of IOC (as used in Oracle database) is provided and includes all common and scientific names, along with 2-letter species codes and sort order. It can be accessed via data(global_species_lookup). As some datasets may not conform to the naming conventions (e.g. Parus --> Poecile) there is a function update_scientific_names() which attempts to replace scientific names where spellings or genera have changed. It does not apply taxonomic changes (i.e. lumping and splitting) but hopefully helps with updating scientific names for species like Blue Tit, Greenfinch etc to assist when merging old and new data. The underlying scientic name changes can be accessed by data(sciname_synonyms).
+
+## Working with grid references
+
+The package includes several functions for converting between different common grid resolutions. For example, you can use rescale_1km_to_2km() to find which tetrad a set of 1-km grid references fall within. You might use recale_10km_to_20km to assign 10-km atlas data to 20-km squares for mapping abundance on a 20-km grid. At present there is only one function that converts numeric eastings and northings to grid references. Owing to the slanted nature of the Irish grid relative to the British National Grid, this function currently only works on eastings and northings (in metres) in Britain. 
+
+```{r, fig.show='hold'}
+library(BTOTools)
+temp1<-data.frame(cbc_code='R.', 
+                  count=10,
+                  onekm='TL1234', 
+                  stringsAsFactors = FALSE)
+rescale_1km_to_2km(temp1,'onekm')
+rescale_1km_to_10km(temp1,'onekm')
+```
+
+
+##Centroids for mapping
+
+For producing simple dot maps the package includes datasets containing the British National Grid coordinates of the centroids of various grids. Although the coordinates are on the British Naitonal Grid, the datasets include Irish squares. Note also that coordinates for the Channel Isles squares have been shifted to a position south of Ireland for mapping purposes (as used in Bird Atlas maps). In a future release this will be made optional.
+
+```{r, fig.show='hold'}
+library(BTOTools)
+data("centroids050")
+plot(centroids050$easting, centroids050$northing, asp = 1)
+```
+
