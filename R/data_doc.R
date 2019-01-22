@@ -33,3 +33,97 @@ NULL
 #' }
 #' @keywords data
 NULL
+
+#' Centroid coordinates of 2-km squares (tetrads)
+#'
+#' A list of coordinates on British National Grid of the centroid of all British and Irish tetrads. Channel Islands squares are included 
+#' but note the location has been shifted as used in Bird Atlas maps.
+#'
+#' @name centroids002
+#' @docType data
+#' @format A data.frame with 84969 rows and 3 columns
+#' \describe{
+#'   \item{character}{tetrad_id (e.g. TL88A)}
+#'   \item{numeric}{easting on British National Grid (metres)}
+#'   \item{numeric}{northing on British National Grid (metres)}
+#' }
+#' @keywords data
+NULL
+
+#' Centroid coordinates of 10-km squares (hectads)
+#'
+#' A list of coordinates on British National Grid of the centroid of all British and Irish 10-km squares. Channel Islands squares are included 
+#' but note the location has been shifted as used in Bird Atlas maps.
+#'
+#' @name centroids010
+#' @docType data
+#' @format A data.frame with 5353 rows and 3 columns
+#' \describe{
+#'   \item{character}{tenkm (e.g. TL88)}
+#'   \item{numeric}{easting on British National Grid (metres)}
+#'   \item{numeric}{northing on British National Grid (metres)}
+#' }
+#' @keywords data
+NULL
+
+#' Centroid coordinates of 20-km squares
+#'
+#' A list of coordinates on British National Grid of the centroid of all British and Irish 20-km squares. Channel Islands squares are included 
+#' but note the location has been shifted as used in Bird Atlas maps.
+#'
+#' @name centroids020
+#' @docType data
+#' @format A data.frame with 1386 rows and 3 columns
+#' \describe{
+#'   \item{character}{segref (e.g. TL_A) where notation is as described in Bird Atlas p35}
+#'   \item{numeric}{easting on British National Grid (metres)}
+#'   \item{numeric}{northing on British National Grid (metres)}
+#' }
+#' @keywords data
+NULL
+
+#' Centroid coordinates of 50-km squares
+#'
+#' A list of coordinates on British National Grid of the centroid of all British and Irish 50-km squares. Channel Islands squares are included 
+#' but note the location has been shifted as used in Bird Atlas maps.
+#'
+#' @name centroids050
+#' @docType data
+#' @format A data.frame with 224 rows and 3 columns
+#' \describe{
+#'   \item{character}{quadref (e.g. TLSW) where notation is as described in Bird Atlas p35}
+#'   \item{numeric}{easting on British National Grid (metres)}
+#'   \item{numeric}{northing on British National Grid (metres)}
+#' }
+#' @keywords data
+NULL
+
+#' Centroid coordinates of 100-km squares
+#'
+#' A list of coordinates on British National Grid of the centroid of all British and Irish 100-km squares. Channel Islands squares are included 
+#' but note the location has been shifted as used in Bird Atlas maps.
+#'
+#' @name centroids100
+#' @docType data
+#' @format A data.frame with 74 rows and 3 columns
+#' \describe{
+#'   \item{character}{hundref (e.g. TL) where notation is as described in Bird Atlas p35}
+#'   \item{numeric}{easting on British National Grid (metres)}
+#'   \item{numeric}{northing on British National Grid (metres)}
+#' }
+#' @keywords data
+NULL
+
+#' Land area of each 10-km squares
+#'
+#' The area (in sqr km) of each 10-km square in Britain, Ireland and the Channel Islands, based on low tide line.
+#'
+#' @name landarea010
+#' @docType data
+#' @format A data.frame with 3894 rows and 2 columns
+#' \describe{
+#'   \item{character}{tenkm (e.g. TL88)}
+#'   \item{numeric}{area (square km)}
+#' }
+#' @keywords data
+NULL
