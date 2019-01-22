@@ -1,0 +1,231 @@
+#' Convert columns of eastings and northings into a British National grid reference
+#'
+#' @description
+#' Takes a dataframe of British National eastings and northings and converts to 1-km references. 
+#' Only works for Britain
+#'
+#' @param df name of input dataframe
+#' @param invar_e quoted string name of the variable containing eastings
+#' @param invar_n quoted string name of the variable containing northings
+#' @param output_res numeric scale (km) at which output grid_ref is desired c(1, 2, 10) for 1-km, tetrad or 10-km
+#'
+#' @return The same dataframe with additional grid_ref column.
+#'
+#'
+#' @examples
+#' temp1<-data.frame(cbc_code=c('R.', 'CH'), count=c(10,1),easting=c(587581,68554), northing=c(281928,805830), stringsAsFactors = FALSE)
+#' temp1a<-coordinates_to_gridref(temp1,'easting', 'northing', 2)
+#' temp2<-data.frame(cbc_code=c('R.', 'CH'), count=c(10,1),easting=c(587581,74273), northing=c(281928,545702), stringsAsFactors = FALSE)
+#' temp2a<-coordinates_to_gridref(temp2,'easting', 'northing', 2)
+#'
+#' @export
+#'
+coordinates_to_gridref<-function(df, invar_e, invar_n, output_res) {
+  #check input parameters
+  if(!is.data.frame(df)) stop('df must be a data frame')
+  if(!is.character(invar_e)) stop('invar_e must be supplied as a numeric')
+  if(!is.character(invar_n)) stop('invar_n must be supplied as a numeric')
+  if(!output_res %in% c(1, 2, 10)) stop('output_res must be one of c(1, 2, 10)')
+  
+  #check there isn't already a tetrad_id column
+  if('grid_ref' %in% names(df)) stop('df already contains a column called grid_ref')
+  
+  #copy to new df for processing so as not to overwrite any columns in original df
+  temp_df <- df[c(invar_e, invar_n)]
+    
+  #force name to be gridref to make easier processing
+  names(temp_df)<- c('easting', 'northing')
+
+  #convert to 1-km
+  #split easting and northing into components
+  temp_df$e100<-floor( temp_df$easting/100000)
+  temp_df$e10 <-floor( (temp_df$easting-(temp_df$e100*100000) ) /10000)
+  temp_df$e1  <-floor( (temp_df$easting-((temp_df$e100*100000)+(temp_df$e10*10000) ))  /1000)
+  temp_df$e01 <-floor( (temp_df$easting-((temp_df$e100*100000)+(temp_df$e10*10000)+(temp_df$e1*1000) )) /100)
+  temp_df$n100<-floor( temp_df$northing/100000)
+  temp_df$n10 <-floor((temp_df$northing-(temp_df$n100*100000) ) /10000)
+  temp_df$n1  <-floor((temp_df$northing-((temp_df$n100*100000)+(temp_df$n10*10000) )) /1000)
+  temp_df$n01 <-floor((temp_df$northing-((temp_df$n100*100000)+(temp_df$n10*10000)+(temp_df$n1*1000) )) /100)
+  
+  
+  #code up 100-km, giving Northern Irish squares off the BNG a dummy XX
+  temp_df$hundref<-NA
+  temp_df$hundref<-ifelse(temp_df$e100==0 & temp_df$n100==0,'SV',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==1 & temp_df$n100==0,'SW',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==2 & temp_df$n100==0,'SX',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==0,'SY',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==0,'SZ',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==5 & temp_df$n100==0,'TV',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==1 & temp_df$n100==1,'SR',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==2 & temp_df$n100==1,'SS',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==1,'ST',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==1,'SU',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==5 & temp_df$n100==1,'TQ',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==6 & temp_df$n100==1,'TR',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==1 & temp_df$n100==2,'SM',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==2 & temp_df$n100==2,'SN',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==2,'SO',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==2,'SP',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==5 & temp_df$n100==2,'TL',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==6 & temp_df$n100==2,'TM',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==2 & temp_df$n100==3,'SH',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==3,'SJ',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==3,'SK',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==5 & temp_df$n100==3,'TF',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==6 & temp_df$n100==3,'TG',temp_df$hundref)
+  #temp_df$hundref<-ifelse(temp_df$e100==0 & temp_df$n100==4,'XX',temp_df$hundref)
+  #temp_df$hundref<-ifelse(temp_df$e100==1 & temp_df$n100==4,'XX',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==2 & temp_df$n100==4,'SC',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==4,'SD',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==4,'SE',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==5 & temp_df$n100==4,'TA',temp_df$hundref)
+  #temp_df$hundref<-ifelse(temp_df$e100==0 & temp_df$n100==5,'XX',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==1 & temp_df$n100==5,'NW',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==2 & temp_df$n100==5,'NX',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==5,'NY',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==5,'NZ',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==1 & temp_df$n100==6,'NR',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==2 & temp_df$n100==6,'NS',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==6,'NT',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==6,'NU',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==0 & temp_df$n100==7,'NL',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==1 & temp_df$n100==7,'NM',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==2 & temp_df$n100==7,'NN',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==7,'NO',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==0 & temp_df$n100==8,'NF',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==1 & temp_df$n100==8,'NG',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==2 & temp_df$n100==8,'NH',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==8,'NJ',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==8,'NK',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==0 & temp_df$n100==9,'NA',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==1 & temp_df$n100==9,'NB',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==2 & temp_df$n100==9,'NC',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==9,'ND',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==10,'HY',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==10,'HZ',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==3 & temp_df$n100==11,'HT',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==11,'HU',temp_df$hundref)
+  temp_df$hundref<-ifelse(temp_df$e100==4 & temp_df$n100==12,'HP',temp_df$hundref)
+  
+
+  #code tetrad grid
+  temp_df$let<-NA
+  temp_df$let<-ifelse(temp_df$e1==0 & temp_df$n1==0,'A',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==0 & temp_df$n1==1,'A',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==1 & temp_df$n1==0,'A',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==1 & temp_df$n1==1,'A',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==2 & temp_df$n1==0,'F',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==2 & temp_df$n1==1,'F',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==3 & temp_df$n1==0,'F',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==3 & temp_df$n1==1,'F',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==4 & temp_df$n1==0,'K',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==4 & temp_df$n1==1,'K',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==5 & temp_df$n1==0,'K',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==5 & temp_df$n1==1,'K',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==6 & temp_df$n1==0,'Q',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==6 & temp_df$n1==1,'Q',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==7 & temp_df$n1==0,'Q',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==7 & temp_df$n1==1,'Q',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==8 & temp_df$n1==0,'V',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==8 & temp_df$n1==1,'V',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==9 & temp_df$n1==0,'V',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==9 & temp_df$n1==1,'V',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==0 & temp_df$n1==2,'B',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==0 & temp_df$n1==3,'B',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==1 & temp_df$n1==2,'B',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==1 & temp_df$n1==3,'B',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==2 & temp_df$n1==2,'G',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==2 & temp_df$n1==3,'G',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==3 & temp_df$n1==2,'G',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==3 & temp_df$n1==3,'G',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==4 & temp_df$n1==2,'L',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==4 & temp_df$n1==3,'L',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==5 & temp_df$n1==2,'L',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==5 & temp_df$n1==3,'L',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==6 & temp_df$n1==2,'R',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==6 & temp_df$n1==3,'R',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==7 & temp_df$n1==2,'R',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==7 & temp_df$n1==3,'R',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==8 & temp_df$n1==2,'W',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==8 & temp_df$n1==3,'W',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==9 & temp_df$n1==2,'W',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==9 & temp_df$n1==3,'W',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==0 & temp_df$n1==4,'C',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==0 & temp_df$n1==5,'C',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==1 & temp_df$n1==4,'C',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==1 & temp_df$n1==5,'C',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==2 & temp_df$n1==4,'H',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==2 & temp_df$n1==5,'H',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==3 & temp_df$n1==4,'H',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==3 & temp_df$n1==5,'H',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==4 & temp_df$n1==4,'M',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==4 & temp_df$n1==5,'M',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==5 & temp_df$n1==4,'M',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==5 & temp_df$n1==5,'M',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==6 & temp_df$n1==4,'S',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==6 & temp_df$n1==5,'S',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==7 & temp_df$n1==4,'S',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==7 & temp_df$n1==5,'S',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==8 & temp_df$n1==4,'X',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==8 & temp_df$n1==5,'X',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==9 & temp_df$n1==4,'X',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==9 & temp_df$n1==5,'X',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==0 & temp_df$n1==6,'D',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==0 & temp_df$n1==7,'D',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==1 & temp_df$n1==6,'D',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==1 & temp_df$n1==7,'D',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==2 & temp_df$n1==6,'I',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==2 & temp_df$n1==7,'I',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==3 & temp_df$n1==6,'I',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==3 & temp_df$n1==7,'I',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==4 & temp_df$n1==6,'N',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==4 & temp_df$n1==7,'N',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==5 & temp_df$n1==6,'N',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==5 & temp_df$n1==7,'N',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==6 & temp_df$n1==6,'T',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==6 & temp_df$n1==7,'T',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==7 & temp_df$n1==6,'T',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==7 & temp_df$n1==7,'T',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==8 & temp_df$n1==6,'Y',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==8 & temp_df$n1==7,'Y',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==9 & temp_df$n1==6,'Y',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==9 & temp_df$n1==7,'Y',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==0 & temp_df$n1==8,'E',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==0 & temp_df$n1==9,'E',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==1 & temp_df$n1==8,'E',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==1 & temp_df$n1==9,'E',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==2 & temp_df$n1==8,'J',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==2 & temp_df$n1==9,'J',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==3 & temp_df$n1==8,'J',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==3 & temp_df$n1==9,'J',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==4 & temp_df$n1==8,'P',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==4 & temp_df$n1==9,'P',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==5 & temp_df$n1==8,'P',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==5 & temp_df$n1==9,'P',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==6 & temp_df$n1==8,'U',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==6 & temp_df$n1==9,'U',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==7 & temp_df$n1==8,'U',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==7 & temp_df$n1==9,'U',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==8 & temp_df$n1==8,'Z',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==8 & temp_df$n1==9,'Z',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==9 & temp_df$n1==8,'Z',temp_df$let)
+  temp_df$let<-ifelse(temp_df$e1==9 & temp_df$n1==9,'Z',temp_df$let)
+  
+  #produce grid refs
+  if(output_res==1) temp_df$grid_ref <- paste0(temp_df$hundref, temp_df$e10, temp_df$e1, temp_df$n10, temp_df$n1)
+  if(output_res==2) temp_df$grid_ref <- paste0(temp_df$hundref, temp_df$e10, temp_df$n10, temp_df$let)
+  if(output_res==10) temp_df$grid_ref <- paste0(temp_df$hundref, temp_df$e10, temp_df$n10)
+  
+  #if the square is off the BNG, force returned grid ref to be NA
+  temp_df$grid_ref <- ifelse(is.na(temp_df$hundref), NA, temp_df$grid_ref)
+  
+  #check if any NAs returned and send warning
+  if(anyNA(temp_df$grid_ref)) warning('NAs were returned; indicates at least one record was outside the British Naitonal Grid')
+  
+  #check df and temp_df still same length
+  if(nrow(df) != nrow(temp_df)) stop('processed list not same length as original df')
+  
+  #add to original df and return
+  df <- cbind(df, grid_ref=temp_df$grid_ref)
+  return(df)
+}
