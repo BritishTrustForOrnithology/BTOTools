@@ -1,0 +1,15 @@
+Package: BTOTools
+Type: Package
+Title: A Package To Access and Manipulate BTO data
+Version: 0.1.0
+Author: Simon Gillings <simon.gillings@bto.org>
+Maintainer: Simon Gillings <simon.gillings@bto.org>
+Description: Access and manipulate archived BTO data.
+License: GPL-2
+Depends: R (>= 3.1.0)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
