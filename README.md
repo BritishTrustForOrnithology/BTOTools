@@ -12,3 +12,8 @@ GITHUB_PAT=blahblahblahblahblahblahblahblahblahblahblahblah
 
 Once you’ve done this you can install the package directly:
 devtools::install_github('BritishTrustForOrnithology/BTOTools', build_vignettes = TRUE)
+
+
+## Update 08/06/2020
+
+A minor update to replace the embedded global_species_lookup and sciname_synonyms datasets to include the latest IOC version 10.1 species names and order. Also added is 5-letter codes as used in demography (ringing and NRS). Consequently I have included new variables code2ltr and code5ltr. cbc_code is retained for backwards compatibility but recommend using code2ltr hereafter. 
