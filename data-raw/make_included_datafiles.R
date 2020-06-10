@@ -32,19 +32,16 @@ use_data(sciname_synonyms, overwrite = TRUE)
 
 #' dataframe of species names for all birds (globally) plus selected UK mammals, herps, inverts
 global_species_lookup <- read.csv('data-raw/global_species_lookup_IOC10_1.csv', 
-                                  colClasses = c('numeric', rep('character', 2), 'numeric', 'character','numeric', 'character', 'character', 'character' ), encoding = 'latin1')
+                                  colClasses = c('numeric', rep('character', 2), 'numeric', 'character','numeric', 'character', 'character', 'character', 'numeric' ), encoding = 'latin1', na.strings = "")
 names(global_species_lookup) <- tolower(names(global_species_lookup))
 names(global_species_lookup)[9] <- 'code5ltr'
+names(global_species_lookup)[10] <- 'euring'
 global_species_lookup$code2ltr <- global_species_lookup$cbc_code
+global_species_lookup <- global_species_lookup[,c(1:8,11,9,10)]
 # head(global_species_lookup)
 # str(global_species_lookup)
 #check the encoding of an accented character
 #subset(global_species_lookup, master_taxon_id == 405)
-
-#infill NA values for cbc_code
-global_species_lookup$cbc_code <- ifelse(global_species_lookup$cbc_code == '', NA, global_species_lookup$cbc_code)
-global_species_lookup$code2ltr <- ifelse(global_species_lookup$code2ltr == '', NA, global_species_lookup$code2ltr)
-global_species_lookup$code5ltr <- ifelse(global_species_lookup$code5ltr == '', NA, global_species_lookup$code5ltr)
 
 #output
 use_data(global_species_lookup, overwrite = TRUE)
