@@ -14,8 +14,9 @@
   \item{numeric}{sort_order = Sort order under IOC}
   \item{character}{alt_int_name = Species' common name as used internationally (e.g. with Eurasian prefix)}
   \item{character}{cbc_code = two-letter code if exists. To be depracated in future issue. Use code2ltr}
-  \item{character}{code5ltr = five-letter code as used in demography, if exists}
   \item{character}{code2ltr = two-letter code if exists. To be used in preference to cbc_code}
+  \item{character}{code5ltr = five-letter code as used in demography, if exists}
+  \item{numeric}{code2ltr = Euring code if exists}
 }}
 \description{
 Common names, scientific names, two-letter codes, five-letter codes, sort order and taxonomic rank for birds, 
