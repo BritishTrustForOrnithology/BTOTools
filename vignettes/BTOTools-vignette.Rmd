@@ -20,7 +20,12 @@ This package aims to provide some simple utilities for working with BTO data. It
 
 ## Working with species
 
-The package includes two reference datasets for working with species names. A global species dictionary based on the latest version of IOC (as used in Oracle database) is provided and includes all common and scientific names, along with 2-letter species codes and sort order. It can be accessed via data(global_species_lookup). As some datasets may not conform to the naming conventions (e.g. Parus --> Poecile) there is a function update_scientific_names() which attempts to replace scientific names where spellings or genera have changed. It does not apply taxonomic changes (i.e. lumping and splitting) but hopefully helps with updating scientific names for species like Blue Tit, Greenfinch etc to assist when merging old and new data. The underlying scientic name changes can be accessed by data(sciname_synonyms).
+The package includes three reference datasets for working with species names. A global species dictionary based on the latest version of IOC (as used in Oracle database) is provided and includes all common and scientific names, along with 2-letter, 5-letter and EURING species codes, plus the current taxonomic sort order. It can be accessed via data(global_species_lookup). 
+
+As some datasets may not conform to the naming conventions (e.g. Parus --> Poecile) there is a function update_scientific_names() which attempts to replace scientific names where spellings or genera have changed. It does not apply taxonomic changes (i.e. lumping and splitting) but hopefully helps with updating scientific names for species like Blue Tit, Greenfinch etc to assist when merging old and new data. The underlying scientic name changes can be accessed by data(sciname_synonyms).
+
+As some numeric species codes have changed (e.g. Cattle Egret 36 --> 52121) there is a function update_speccodes() which will replace legacy species codes with current ones, using the dataset data(speccode_mapping). This should only be necessary for archived files; anything recently created from Oracle will use the current codes. Archived files that are known to be affected include all files associated with BirdAtlas 2007-11, and all previous atlases. The underlying species code lookup can be accessed by data(speccode_mapping).
+
 
 ## Working with grid references
 
