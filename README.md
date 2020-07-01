@@ -21,3 +21,7 @@ A minor update to replace the embedded global_species_lookup and sciname_synonym
 ## Update 10/06/2020
 
 A minor update to include Euring code in the embedded global_species_lookup.
+
+## Update 01/07/2020
+
+Added new dataset (speccode_mapping) and associated function (update_speccodes()) which provide translation of legacy numeric species codes (e.g. as used in archived files of all atlases) into currently used species codes (master_taxon_ids). When using any old archive data files with numeric species codes, you are advised to run update_speccodes() before merging with the data(global_species_lookup).
