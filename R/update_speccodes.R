@@ -38,8 +38,8 @@ update_speccodes <- function(df, var, report_changes=FALSE) {
   df$speccodeworking <- df[,varn]
   
   #get the synonyms
-  #data("speccode_mapping", envir = environment())
-  load('data/speccode_mapping.rda')
+  data("speccode_mapping", envir = environment())
+  #load('data/speccode_mapping.rda')
 
   #merge new speccodes into a new working column
   df <- merge(df, speccode_mapping, by.x = 'speccodeworking', by.y = 'old_species_code', all.x = TRUE)
