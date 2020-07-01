@@ -67,3 +67,16 @@ use_data(centroids100, overwrite = TRUE)
 landarea010 <- read.table('data-raw/BI010_area_above_low_tide_line.csv', sep = ",", header = T, colClasses = c("character", "numeric"))
 use_data(landarea010, overwrite = TRUE)
 
+
+#' lookup to update old speccode (from BirdAtlas era and before)
+speccode_mapping <- read.table('data-raw/export_IOC73_SPECIES_MAP.csv', sep = ',', header = TRUE, colClasses = c(rep('numeric',3), rep('character',2)), na.strings = c(''))
+names(speccode_mapping) <- tolower(names(speccode_mapping))
+speccode_mapping$mapping_id <- NULL
+names(speccode_mapping)[1] <- 'old_species_code'
+#per Andy M, need to filter as follows for B&I data
+speccode_mapping <- subset(speccode_mapping, british_isles =='Y' & is.na(match_type) | match_type == 'I')
+speccode_mapping$british_isles <- NULL
+speccode_mapping$match_type <- NULL
+head(speccode_mapping)
+#output
+use_data(speccode_mapping, overwrite = TRUE)
