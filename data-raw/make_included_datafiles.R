@@ -2,14 +2,24 @@ library(devtools)
 #' dataframe of species scientific name synonyms
 
 #' read the old scientific names with their matched new names
-sciname_synonyms <- read.csv('data-raw/sci_name_synonyms.csv', colClasses = c('numeric','character','character','numeric'), encoding = 'latin1')
+sciname_synonyms <- read.csv('data-raw/sci_name_synonyms_IOC10_1.csv', 
+                             colClasses = c('numeric','character','numeric', 'character', 'character','numeric', 'character','numeric'),
+                             encoding = 'latin1')
 names(sciname_synonyms) <- tolower(names(sciname_synonyms))
+#filter to species only
+sciname_synonyms <- subset(sciname_synonyms, alternative_rank_id == 100 & current_rank_id == 100)
+sciname_synonyms$current_rank_id <- NULL
+sciname_synonyms$current_rank_name <- NULL
+sciname_synonyms$alternative_rank_id <- NULL
+sciname_synonyms$alternative_rank_name <- NULL
+sciname_synonyms$number_of_lists <- NULL
 sciname_synonyms$sort_order_ioc <- NULL
 
 #remove a couple of NA type values
 sciname_synonyms <- subset(sciname_synonyms, master_taxon_id != 0)
 sciname_synonyms <- subset(sciname_synonyms, alternative_sci_name != 'n/a')
 
+head(sciname_synonyms)
 #add a couple of manual entries (use list instead of c to prevent class changes)
 sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(23, 'Hydrobates leucorhous', 'Oceanodroma leucorhoa')
 sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(433, 'Parus montanus', 'Poecile montanus')
@@ -21,16 +31,17 @@ use_data(sciname_synonyms, overwrite = TRUE)
 
 
 #' dataframe of species names for all birds (globally) plus selected UK mammals, herps, inverts
-global_species_lookup <- read.csv('data-raw/global_species_lookup.csv', 
-                                  colClasses = c('numeric', rep('character', 2), 'numeric', 'character','numeric', 'character', 'character' ), encoding = 'latin1')
+global_species_lookup <- read.csv('data-raw/global_species_lookup_IOC10_1.csv', 
+                                  colClasses = c('numeric', rep('character', 2), 'numeric', 'character','numeric', 'character', 'character', 'character', 'numeric' ), encoding = 'latin1', na.strings = "")
 names(global_species_lookup) <- tolower(names(global_species_lookup))
+names(global_species_lookup)[9] <- 'code5ltr'
+names(global_species_lookup)[10] <- 'euring'
+global_species_lookup$code2ltr <- global_species_lookup$cbc_code
+global_species_lookup <- global_species_lookup[,c(1:8,11,9,10)]
 # head(global_species_lookup)
 # str(global_species_lookup)
 #check the encoding of an accented character
 #subset(global_species_lookup, master_taxon_id == 405)
-
-#infill NA values for cbc_code
-global_species_lookup$cbc_code <- ifelse(global_species_lookup$cbc_code == '', NA, global_species_lookup$cbc_code)
 
 #output
 use_data(global_species_lookup, overwrite = TRUE)
@@ -56,3 +67,16 @@ use_data(centroids100, overwrite = TRUE)
 landarea010 <- read.table('data-raw/BI010_area_above_low_tide_line.csv', sep = ",", header = T, colClasses = c("character", "numeric"))
 use_data(landarea010, overwrite = TRUE)
 
+
+#' lookup to update old speccode (from BirdAtlas era and before)
+speccode_mapping <- read.table('data-raw/export_IOC73_SPECIES_MAP.csv', sep = ',', header = TRUE, colClasses = c(rep('numeric',3), rep('character',2)), na.strings = c(''))
+names(speccode_mapping) <- tolower(names(speccode_mapping))
+speccode_mapping$mapping_id <- NULL
+names(speccode_mapping)[1] <- 'old_species_code'
+#per Andy M, need to filter as follows for B&I data
+speccode_mapping <- subset(speccode_mapping, british_isles =='Y' & (is.na(match_type) | match_type == 'I'))
+speccode_mapping$british_isles <- NULL
+speccode_mapping$match_type <- NULL
+head(speccode_mapping)
+#output
+use_data(speccode_mapping, overwrite = TRUE)

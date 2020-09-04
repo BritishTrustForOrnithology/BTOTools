@@ -1,18 +1,23 @@
 #' Species dictionary lookup
 #'
-#' Common names, scientific names, two-letter codes, sort order and taxonomic rank for birds, mammals and various inverts
+#' Common names, scientific names, two-letter codes, five-letter codes, sort order and taxonomic rank for birds, 
+#' mammals and various inverts. Bird names as used in IOC version 10.1, last updated June 2020.
 #'
 #' @name global_species_lookup
 #' @docType data
 #' @format A data.frame with 34051 rows and eight columns
 #' \describe{
-#'   \item{numeric}{Numeric taxon key code}
-#'   \item{character}{Species' scientific name}
-#'   \item{character}{Species' common name}
-#'   \item{numeric}{Taxonomic rank identification (numeric) of entity}
-#'   \item{character}{Taxonomic rank of entity}
-#'   \item{numeric}{Sort order under IOC}
-#'   \item{character}{Two-letter code if exists}
+#'   \item{numeric}{master_taxon_id = Numeric taxon key code}
+#'   \item{character}{scientific_name = Species' scientific name}
+#'   \item{character}{english_name = Species' common name as in common usage in UK}
+#'   \item{numeric}{taxon_rank_id = Taxonomic rank identification (numeric) of entity}
+#'   \item{character}{taxon_rank_name = Taxonomic rank of entity}
+#'   \item{numeric}{sort_order = Sort order under IOC}
+#'   \item{character}{alt_int_name = Species' common name as used internationally (e.g. with Eurasian prefix)}
+#'   \item{character}{cbc_code = two-letter code if exists. To be depracated in future issue. Use code2ltr}
+#'   \item{character}{code2ltr = two-letter code if exists. To be used in preference to cbc_code}
+#'   \item{character}{code5ltr = five-letter code as used in demography, if exists}
+#'   \item{numeric}{code2ltr = Euring code if exists}
 #' }
 #' @references IOC
 #' @keywords data
@@ -21,7 +26,7 @@ NULL
 #' Species' scientific name synonyms
 #'
 #' A list of previously used scientific names and their currently used synonym, to assist in updating taxonomy 
-#' of old data files
+#' of old data files. Bird names as used in IOC version 10.1, last updated June 2020.
 #'
 #' @name sciname_synonyms
 #' @docType data
@@ -124,6 +129,24 @@ NULL
 #' \describe{
 #'   \item{character}{tenkm (e.g. TL88)}
 #'   \item{numeric}{area (square km)}
+#' }
+#' @keywords data
+NULL
+
+#' Species code mapping
+#'
+#' Following the move to use IOC world bird names, some species codes had to be updated in the Oracle system. 
+#' However, older archived files (e.g. those for BirdAtlas 2007-11 and earlier ) still have the old species code 
+#' encoding. For example Cattle Egret will be represented in old files as speccode = 35 whereas to match with 
+#' new species dictionary information this needs to be updated to 52121. This file provides the necessary lookup
+#' and can be used in conjunction with the BTOTools update_speccode() function.
+#'
+#' @name speccode_mapping
+#' @docType data
+#' @format A data.frame with 462 rows and two columns
+#' \describe{
+#'   \item{numeric}{old_species_code = Numeric speceies code as used in older archived files}
+#'   \item{numeric}{new_species_code = Numeric speceies code as used currently in Oracle etc}
 #' }
 #' @keywords data
 NULL

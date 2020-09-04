@@ -6,16 +6,21 @@
 \title{Species dictionary lookup}
 \format{A data.frame with 34051 rows and eight columns
 \describe{
-  \item{numeric}{Numeric taxon key code}
-  \item{character}{Species' scientific name}
-  \item{character}{Species' common name}
-  \item{numeric}{Taxonomic rank identification (numeric) of entity}
-  \item{character}{Taxonomic rank of entity}
-  \item{numeric}{Sort order under IOC}
-  \item{character}{Two-letter code if exists}
+  \item{numeric}{master_taxon_id = Numeric taxon key code}
+  \item{character}{scientific_name = Species' scientific name}
+  \item{character}{english_name = Species' common name as in common usage in UK}
+  \item{numeric}{taxon_rank_id = Taxonomic rank identification (numeric) of entity}
+  \item{character}{taxon_rank_name = Taxonomic rank of entity}
+  \item{numeric}{sort_order = Sort order under IOC}
+  \item{character}{alt_int_name = Species' common name as used internationally (e.g. with Eurasian prefix)}
+  \item{character}{cbc_code = two-letter code if exists. To be depracated in future issue. Use code2ltr}
+  \item{character}{code2ltr = two-letter code if exists. To be used in preference to cbc_code}
+  \item{character}{code5ltr = five-letter code as used in demography, if exists}
+  \item{numeric}{code2ltr = Euring code if exists}
 }}
 \description{
-Common names, scientific names, two-letter codes, sort order and taxonomic rank for birds, mammals and various inverts
+Common names, scientific names, two-letter codes, five-letter codes, sort order and taxonomic rank for birds, 
+mammals and various inverts. Bird names as used in IOC version 10.1, last updated June 2020.
 }
 \references{
 IOC

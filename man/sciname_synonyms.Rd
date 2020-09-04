@@ -12,6 +12,6 @@
 }}
 \description{
 A list of previously used scientific names and their currently used synonym, to assist in updating taxonomy 
-of old data files
+of old data files. Bird names as used in IOC version 10.1, last updated June 2020.
 }
 \keyword{data}
