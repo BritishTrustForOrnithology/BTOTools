@@ -31,6 +31,13 @@ update_scientific_names <- function(df, var, report_changes=FALSE) {
   if(!var %in% names(df)) stop('var is not a column name in df')
   if(!is.logical(report_changes)) stop('report_changes must be TRUE or FALSE')
   
+  #check if df is a tibble - if so, convert and warn
+  if('tbl' %in% class(df)) {
+    df <- as.data.frame(df)
+    warning('df was supplied as a tibble and has been converted to a dataframe')
+  }
+  
+  
   #check which variable holds the scientific names to be scanned
   varn <- which(names(df) == var)
   
@@ -47,11 +54,12 @@ update_scientific_names <- function(df, var, report_changes=FALSE) {
   df$scinameworking2 <- temp[df$scinameworking]
   num_recs_in_df <- (nrow(df))
   num_recs_updated_in_df <- (nrow(df[!is.na(df$scinameworking2),]))
-  cat(num_recs_updated_in_df, ' out of ', num_recs_in_df, ' records updated.')
+  cat(num_recs_updated_in_df, ' out of ', num_recs_in_df, ' records updated.\n')
   
   #optional reporting
   if(report_changes == TRUE) {
     optout <- subset(df, !is.na(scinameworking2))
+    optout$unit <- 1
     print(setNames(aggregate(data = optout, unit ~ scinameworking + scinameworking2, NROW), c('from', 'to', 'num_rows')))
   }
   
