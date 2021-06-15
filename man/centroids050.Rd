@@ -4,12 +4,14 @@
 \name{centroids050}
 \alias{centroids050}
 \title{Centroid coordinates of 50-km squares}
-\format{A data.frame with 224 rows and 3 columns
+\format{
+A data.frame with 224 rows and 3 columns
 \describe{
   \item{character}{quadref (e.g. TLSW) where notation is as described in Bird Atlas p35}
   \item{numeric}{easting on British National Grid (metres)}
   \item{numeric}{northing on British National Grid (metres)}
-}}
+}
+}
 \description{
 A list of coordinates on British National Grid of the centroid of all British and Irish 50-km squares. Channel Islands squares are included 
 but note the location has been shifted as used in Bird Atlas maps.

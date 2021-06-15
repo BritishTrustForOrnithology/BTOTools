@@ -4,11 +4,13 @@
 \name{landarea010}
 \alias{landarea010}
 \title{Land area of each 10-km squares}
-\format{A data.frame with 3894 rows and 2 columns
+\format{
+A data.frame with 3894 rows and 2 columns
 \describe{
   \item{character}{tenkm (e.g. TL88)}
   \item{numeric}{area (square km)}
-}}
+}
+}
 \description{
 The area (in sqr km) of each 10-km square in Britain, Ireland and the Channel Islands, based on low tide line.
 }

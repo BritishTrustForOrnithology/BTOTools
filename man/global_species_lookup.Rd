@@ -4,7 +4,8 @@
 \name{global_species_lookup}
 \alias{global_species_lookup}
 \title{Species dictionary lookup}
-\format{A data.frame with 34051 rows and eight columns
+\format{
+A data.frame with 34051 rows and eight columns
 \describe{
   \item{numeric}{master_taxon_id = Numeric taxon key code}
   \item{character}{scientific_name = Species' scientific name}
@@ -17,7 +18,8 @@
   \item{character}{code2ltr = two-letter code if exists. To be used in preference to cbc_code}
   \item{character}{code5ltr = five-letter code as used in demography, if exists}
   \item{numeric}{code2ltr = Euring code if exists}
-}}
+}
+}
 \description{
 Common names, scientific names, two-letter codes, five-letter codes, sort order and taxonomic rank for birds, 
 mammals and various inverts. Bird names as used in IOC version 10.1, last updated June 2020.

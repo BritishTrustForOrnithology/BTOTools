@@ -13,13 +13,13 @@ coordinates_to_gridref(df, invar_e, invar_n, output_res)
 
 \item{invar_n}{quoted string name of the variable containing northings}
 
-\item{output_res}{numeric scale (km) at which output grid_ref is desired c(1, 2, 10) for 1-km, tetrad or 10-km}
+\item{output_res}{numeric scale (km) at which output grid_ref is desired c(1, 2, 10, 20, 50, 100) for 1-km, tetrad, 10-km, 20-km, 50-km or 100-km}
 }
 \value{
 The same dataframe with additional grid_ref column.
 }
 \description{
-Takes a dataframe of British National eastings and northings and converts to 1-km references. 
+Takes a dataframe of British National eastings and northings and converts to grid references of various resolutions. 
 Only works for Britain
 }
 \examples{

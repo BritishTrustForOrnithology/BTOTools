@@ -4,11 +4,13 @@
 \name{speccode_mapping}
 \alias{speccode_mapping}
 \title{Species code mapping}
-\format{A data.frame with 462 rows and two columns
+\format{
+A data.frame with 462 rows and two columns
 \describe{
   \item{numeric}{old_species_code = Numeric speceies code as used in older archived files}
   \item{numeric}{new_species_code = Numeric speceies code as used currently in Oracle etc}
-}}
+}
+}
 \description{
 Following the move to use IOC world bird names, some species codes had to be updated in the Oracle system. 
 However, older archived files (e.g. those for BirdAtlas 2007-11 and earlier ) still have the old species code 
