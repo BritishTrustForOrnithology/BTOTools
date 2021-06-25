@@ -256,10 +256,10 @@ coordinates_to_gridref<-function(df, invar_e, invar_n, output_res) {
   
   #code quadrefs (i.e. 50-kms)
   temp_df$quadref<-NA
-  temp_df$quadref<-ifelse(temp_df$e100<=4 & temp_df$n100<=4, 'SW', temp_df$quadref)
-  temp_df$quadref<-ifelse(temp_df$e100<=4 & temp_df$n100>4, 'NW', temp_df$quadref)
-  temp_df$quadref<-ifelse(temp_df$e100>4 & temp_df$n100>4, 'NE', temp_df$quadref)
-  temp_df$quadref<-ifelse(temp_df$e100>4 & temp_df$n100<=4, 'SE', temp_df$quadref)
+  temp_df$quadref<-ifelse(temp_df$e10<=4 & temp_df$n10<=4, 'SW', temp_df$quadref)
+  temp_df$quadref<-ifelse(temp_df$e10<=4 & temp_df$n10>4, 'NW', temp_df$quadref)
+  temp_df$quadref<-ifelse(temp_df$e10>4 & temp_df$n10>4, 'NE', temp_df$quadref)
+  temp_df$quadref<-ifelse(temp_df$e10>4 & temp_df$n10<=4, 'SE', temp_df$quadref)
   
   #code up 100-km, giving Northern Irish squares off the BNG a dummy XX
   temp_df$hundref<-NA
