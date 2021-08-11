@@ -22,7 +22,7 @@ A data.frame with 34051 rows and eight columns
 }
 \description{
 Common names, scientific names, two-letter codes, five-letter codes, sort order and taxonomic rank for birds, 
-mammals and various inverts. Bird names as used in IOC version 10.1, last updated June 2020.
+mammals and various inverts. Bird names as used in IOC version 11.2, last updated August 2021.
 }
 \references{
 IOC

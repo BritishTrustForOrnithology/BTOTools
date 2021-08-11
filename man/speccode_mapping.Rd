@@ -16,6 +16,7 @@ Following the move to use IOC world bird names, some species codes had to be upd
 However, older archived files (e.g. those for BirdAtlas 2007-11 and earlier ) still have the old species code 
 encoding. For example Cattle Egret will be represented in old files as speccode = 35 whereas to match with 
 new species dictionary information this needs to be updated to 52121. This file provides the necessary lookup
-and can be used in conjunction with the BTOTools update_speccode() function.
+and can be used in conjunction with the BTOTools update_speccode() function. Based on  IOC version 11.2, 
+last updated August 2021
 }
 \keyword{data}

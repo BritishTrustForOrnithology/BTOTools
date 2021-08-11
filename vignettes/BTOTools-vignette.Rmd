@@ -26,6 +26,7 @@ As some datasets may not conform to the naming conventions (e.g. Parus --> Poeci
 
 As some numeric species codes have changed (e.g. Cattle Egret 36 --> 52121) there is a function update_speccodes() which will replace legacy species codes with current ones, using the dataset data(speccode_mapping). This should only be necessary for archived files; anything recently created from Oracle will use the current codes. Archived files that are known to be affected include all files associated with BirdAtlas 2007-11, and all previous atlases. The underlying species code lookup can be accessed by data(speccode_mapping).
 
+A helper function (get_species_info()) is provided should you need to look up information for a species if you know at least one of its attributes (e.g. you can search by its name, scientific name, and various species codes).
 
 ## Working with grid references
 
