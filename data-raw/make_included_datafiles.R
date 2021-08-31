@@ -55,7 +55,7 @@ centroids010 <- read.table('data-raw/010km_xy_coords.csv', sep = ",", header = T
 centroids020 <- read.table('data-raw/020km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "numeric", "numeric"))
 names(centroids020)[1] <- 'segref'
 centroids050 <- read.table('data-raw/050km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "numeric", "numeric"))
-centroids100 <- read.table('data-raw/100km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "numeric", "numeric"))
+centroids100 <- read.table('data-raw/100km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "numeric", "numeric"), na.strings = '')
 names(centroids100)[1] <- 'hundref'
 #output
 use_data(centroids002, overwrite = TRUE)
