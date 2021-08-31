@@ -53,6 +53,6 @@ rescale_10km_to_50km<-function(df,invar) {
   if(nrow(df) != nrow(temp_df)) stop('processed segref list not same length as original df')
   
   #add to original df and return
-  df <- cbind(df, temp_df)
+  df <- cbind(df, temp_df, stringsAsFactors = FALSE)
   return(df)
 }

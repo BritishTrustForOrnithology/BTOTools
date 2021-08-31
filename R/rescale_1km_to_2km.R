@@ -156,6 +156,6 @@ rescale_1km_to_2km<-function(df,invar) {
   if(nrow(df) != nrow(temp_df)) stop('processed tetrad list not same length as original df')
   
   #add to original df and return
-  df <- cbind(df, temp_df)
+  df <- cbind(df, temp_df, stringsAsFactors = FALSE)
   return(df)
 }

@@ -340,6 +340,6 @@ coordinates_to_gridref<-function(df, invar_e, invar_n, output_res) {
   if(nrow(df) != nrow(temp_df)) stop('processed list not same length as original df')
   
   #add to original df and return
-  df <- cbind(df, grid_ref=temp_df$grid_ref)
+  df <- cbind(df, grid_ref=temp_df$grid_ref, stringsAsFactors = FALSE)
   return(df)
 }
