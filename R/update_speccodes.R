@@ -50,8 +50,11 @@ update_speccodes <- function(df, var, report_changes=FALSE) {
   #optional reporting
   if(report_changes == TRUE) {
     optout <- subset(df, !is.na(new_species_code))
+    #add the new identity as a sense check 
+    optout <- merge(optout, global_species_lookup[,c("master_taxon_id", "english_name")], by.x = 'new_species_code', by.y = 'master_taxon_id', all.x = TRUE)
     optout$unit <- 1
-    print(setNames(aggregate(data = optout, unit ~ speccodeworking + new_species_code, NROW), c('from', 'to', 'num_rows')))
+    print(setNames(aggregate(data = optout, unit ~ speccodeworking + new_species_code + english_name, NROW), 
+                   c('from_code', 'to_code', 'to_name', 'num_rows')))
   }
   
   #copy across the unchanged scinames
