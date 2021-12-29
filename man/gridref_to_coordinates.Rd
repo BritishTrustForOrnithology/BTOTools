@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridref_to_coordinates.R
 \name{gridref_to_coordinates}
 \alias{gridref_to_coordinates}
-\title{Converts a column of British National grid references to columns of eastings and northings}
+\title{Converts a column of grid references to columns of eastings and northings}
 \usage{
 gridref_to_coordinates(df, invar_gridref)
 }
@@ -12,15 +12,22 @@ gridref_to_coordinates(df, invar_gridref)
 \item{invar_gridref}{quoted string name of the variable containing the grid reference}
 }
 \value{
-The same dataframe with additional easting and northing columns.
+The same dataframe with additional easting and northing columns and region 
+column indicating which grid system each row originates from, and therefore which grid
+system the coordinates are from.
 }
 \description{
-Takes a dataframe of British National grid reference and produce new columns of eastings and 
-northings. Only works for Britain.
+Takes a dataframe of grid reference and produce new columns of eastings and 
+northings. This function will work for British, Irish and Channel Islands grid references. 
+But note that it does not translate between regions. i.e. Channel Islands grid references 
+are converted to Channel Islands coordinates; Irish grid references are converted to Irish
+coordinates. If you apply this function to a dataframe containing grid references from 
+multiple regions it will return coordinates for multiple regions.
 }
 \examples{
 temp1 <- data.frame(other1 = 'A', other2 = 'B', 
-square = c('TL1', 'TL12', 'TL12A', 'TL1234', 'TL123456', 'TL1234567', 'GB1234', 'TL12O'), 
+square = c('TL1', 'TL12', 'TL12A', 'TL1234', 'TL123456', 'TL1234567', 'GB1234', 
+'TL12O', 'IN1234', 'WV2575'), 
 stringsAsFactors = FALSE)
 temp1a<-gridref_to_coordinates(temp1,'square')
 
