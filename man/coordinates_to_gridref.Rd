@@ -4,7 +4,7 @@
 \alias{coordinates_to_gridref}
 \title{Convert easting and northing coordinates into a grid reference}
 \usage{
-coordinates_to_gridref(df, invar_e, invar_n, output_res)
+coordinates_to_gridref(df, invar_e, invar_n, output_res, region)
 }
 \arguments{
 \item{df}{name of input dataframe}

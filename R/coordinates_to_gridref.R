@@ -6,10 +6,10 @@
 #' resolution to return the grid reference. Note this function does not convert between grid systems.
 #'
 #' @param df name of input dataframe
-#' @param region One of GB (=Great Britain), I (=Ireland) or CH (=Channel Islands)
 #' @param invar_e string, name of the variable containing eastings
 #' @param invar_n string, name of the variable containing northings
 #' @param output_res numeric, scale (km) at which output grid_ref is desired c(1, 2, 10, 20, 50, 100) for 1-km, tetrad, 10-km, 20-km, 50-km or 100-km
+#' @param region One of GB (=Great Britain), I (=Ireland) or CH (=Channel Islands)
 #'
 #' @return The same dataframe with additional grid_ref column.
 #'
@@ -22,7 +22,7 @@
 #'
 #' @export
 #'
-coordinates_to_gridref<-function(df, invar_e, invar_n, output_res) {
+coordinates_to_gridref<-function(df, invar_e, invar_n, output_res, region) {
   #check input parameters
   if(!is.data.frame(df)) stop('df must be a data frame')
   if(is.null(region)) stop('Region must be defined as one of GB, I or CH')
