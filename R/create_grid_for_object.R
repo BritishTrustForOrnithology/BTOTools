@@ -8,12 +8,14 @@
 #' @param grid_resolution = the resolution in metres of the desired grid
 #' @param clip_tolerance = numeric, the minimum overlap (sq metres) between a grid cell and sp_object for the cell to be retained
 #' @param region = One of GB (=Great Britain), I (=Ireland) or CH (=Channel Islands)
+#' @param outvarname = string, name for the exported grid reference column (e.g. 'tetrad_id')
+#' 
 #' @return An sf object
 #' 
 #' @import sf
 #' 
 #' @export
-create_grid_for_object <- function(sp_object, grid_resolution, clip_tolerance = 0, region = NULL) {
+create_grid_for_object <- function(sp_object, grid_resolution, clip_tolerance = 0, region = NULL, outvarname) {
   if(is.null(region)) stop('Region must be defined as one of GB, I or CH')
   if(!region %in% c('GB','I','CH')) stop('Region should be one of GB, I or CH')
   

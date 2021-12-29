@@ -8,7 +8,8 @@ create_grid_for_object(
   sp_object,
   grid_resolution,
   clip_tolerance = 0,
-  region = NULL
+  region = NULL,
+  outvarname
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ create_grid_for_object(
 \item{clip_tolerance}{= numeric, the minimum overlap (sq metres) between a grid cell and sp_object for the cell to be retained}
 
 \item{region}{= One of GB (=Great Britain), I (=Ireland) or CH (=Channel Islands)}
+
+\item{outvarname}{= string, name for the exported grid reference column (e.g. 'tetrad_id')}
 }
 \value{
 An sf object
