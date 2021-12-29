@@ -2,30 +2,33 @@
 % Please edit documentation in R/coordinates_to_gridref.R
 \name{coordinates_to_gridref}
 \alias{coordinates_to_gridref}
-\title{Convert columns of eastings and northings into a British National grid reference}
+\title{Convert easting and northing coordinates into a grid reference}
 \usage{
 coordinates_to_gridref(df, invar_e, invar_n, output_res)
 }
 \arguments{
 \item{df}{name of input dataframe}
 
-\item{invar_e}{quoted string name of the variable containing eastings}
+\item{invar_e}{string, name of the variable containing eastings}
 
-\item{invar_n}{quoted string name of the variable containing northings}
+\item{invar_n}{string, name of the variable containing northings}
 
-\item{output_res}{numeric scale (km) at which output grid_ref is desired c(1, 2, 10, 20, 50, 100) for 1-km, tetrad, 10-km, 20-km, 50-km or 100-km}
+\item{output_res}{numeric, scale (km) at which output grid_ref is desired c(1, 2, 10, 20, 50, 100) for 1-km, tetrad, 10-km, 20-km, 50-km or 100-km}
+
+\item{region}{One of GB (=Great Britain), I (=Ireland) or CH (=Channel Islands)}
 }
 \value{
 The same dataframe with additional grid_ref column.
 }
 \description{
-Takes a dataframe of British National eastings and northings and converts to grid references of various resolutions. 
-Only works for Britain
+Takes a dataframe of eastings and northings on one of the British, Irish or Channel Islands
+national grids, and converts to grid references on the respective grid. Users can decide at what
+resolution to return the grid reference. Note this function does not convert between grid systems.
 }
 \examples{
-temp1<-data.frame(cbc_code=c('R.', 'CH'), count=c(10,1),easting=c(587581,68554), northing=c(281928,805830), stringsAsFactors = FALSE)
-temp1a<-coordinates_to_gridref(temp1,'easting', 'northing', 2)
-temp2<-data.frame(cbc_code=c('R.', 'CH'), count=c(10,1),easting=c(587581,74273), northing=c(281928,545702), stringsAsFactors = FALSE)
-temp2a<-coordinates_to_gridref(temp2,'easting', 'northing', 2)
+temp1<-data.frame(cbc_code=c('R.', 'CH'), count=c(10,1),easting=c(587581, 68554), northing=c(281928, 805830), stringsAsFactors = FALSE)
+temp1a<-coordinates_to_gridref(temp1, region = 'GB', 'easting', 'northing', 2)
+temp2<-data.frame(cbc_code=c('R.', 'CH'), count=c(10,1),easting=c(525552, 535445), northing=c(5475493, 5483512), stringsAsFactors = FALSE)
+temp2a<-coordinates_to_gridref(temp2, region = 'CH', 'easting', 'northing', 2)
 
 }
