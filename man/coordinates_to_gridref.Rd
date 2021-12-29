@@ -13,7 +13,7 @@ coordinates_to_gridref(df, invar_e, invar_n, output_res, region)
 
 \item{invar_n}{string, name of the variable containing northings}
 
-\item{output_res}{numeric, scale (km) at which output grid_ref is desired c(1, 2, 10, 20, 50, 100) for 1-km, tetrad, 10-km, 20-km, 50-km or 100-km}
+\item{output_res}{numeric, scale (km) at which output grid_ref is desired c(0.5, 1, 2, 10, 20, 50, 100) for 1-km, tetrad, 10-km, 20-km, 50-km or 100-km}
 
 \item{region}{One of GB (=Great Britain), I (=Ireland) or CH (=Channel Islands)}
 }

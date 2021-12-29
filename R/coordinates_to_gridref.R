@@ -8,7 +8,7 @@
 #' @param df name of input dataframe
 #' @param invar_e string, name of the variable containing eastings
 #' @param invar_n string, name of the variable containing northings
-#' @param output_res numeric, scale (km) at which output grid_ref is desired c(1, 2, 10, 20, 50, 100) for 1-km, tetrad, 10-km, 20-km, 50-km or 100-km
+#' @param output_res numeric, scale (km) at which output grid_ref is desired c(0.5, 1, 2, 10, 20, 50, 100) for 1-km, tetrad, 10-km, 20-km, 50-km or 100-km
 #' @param region One of GB (=Great Britain), I (=Ireland) or CH (=Channel Islands)
 #'
 #' @return The same dataframe with additional grid_ref column.
@@ -29,7 +29,7 @@ coordinates_to_gridref<-function(df, invar_e, invar_n, output_res, region) {
   if(!region %in% c('GB','I','CH')) stop('Region should be one of GB, I or CH')
   if(!is.character(invar_e)) stop('invar_e must be supplied as a numeric')
   if(!is.character(invar_n)) stop('invar_n must be supplied as a numeric')
-  if(!output_res %in% c(1, 2, 10, 20, 50, 100)) stop('output_res must be one of c(1, 2, 10)')
+  if(!output_res %in% c(0.5, 1, 2, 10, 20, 50, 100)) stop('output_res must be one of c(1, 2, 10)')
 
   #warnings  
   if(region == 'GB') warning('Converting coordinates on British grid to British OS grid references\n')
@@ -45,16 +45,24 @@ coordinates_to_gridref<-function(df, invar_e, invar_n, output_res, region) {
   #force name to be gridref to make easier processing
   names(temp_df)<- c('easting', 'northing')
 
-  #convert to 1-km
   #split easting and northing into components
-  temp_df$e100<-floor( temp_df$easting/100000)
-  temp_df$e10 <-floor( (temp_df$easting-(temp_df$e100*100000) ) /10000)
-  temp_df$e1  <-floor( (temp_df$easting-((temp_df$e100*100000)+(temp_df$e10*10000) ))  /1000)
-  temp_df$e01 <-floor( (temp_df$easting-((temp_df$e100*100000)+(temp_df$e10*10000)+(temp_df$e1*1000) )) /100)
-  temp_df$n100<-floor( temp_df$northing/100000)
-  temp_df$n10 <-floor((temp_df$northing-(temp_df$n100*100000) ) /10000)
-  temp_df$n1  <-floor((temp_df$northing-((temp_df$n100*100000)+(temp_df$n10*10000) )) /1000)
-  temp_df$n01 <-floor((temp_df$northing-((temp_df$n100*100000)+(temp_df$n10*10000)+(temp_df$n1*1000) )) /100)
+  temp_df$e100<- floor(temp_df$easting/100000)
+  temp_df$e10 <- floor((temp_df$easting-(temp_df$e100*100000) ) /10000)
+  temp_df$e1  <- floor((temp_df$easting-((temp_df$e100*100000)+(temp_df$e10*10000) ))  /1000)
+  temp_df$e01 <- floor((temp_df$easting-((temp_df$e100*100000)+(temp_df$e10*10000)+(temp_df$e1*1000) )) /100)
+  temp_df$e001 <-floor((temp_df$easting-((temp_df$e100*100000)+(temp_df$e10*10000)+(temp_df$e1*1000)+(temp_df$e01*100))) /10)
+  temp_df$n100<- floor(temp_df$northing/100000)
+  temp_df$n10 <- floor((temp_df$northing-(temp_df$n100*100000) ) /10000)
+  temp_df$n1  <- floor((temp_df$northing-((temp_df$n100*100000)+(temp_df$n10*10000) )) /1000)
+  temp_df$n01 <- floor((temp_df$northing-((temp_df$n100*100000)+(temp_df$n10*10000)+(temp_df$n1*1000) )) /100)
+  temp_df$n001 <-floor((temp_df$northing-((temp_df$n100*100000)+(temp_df$n10*10000)+(temp_df$n1*1000)+(temp_df$n01*100))) /10)
+  
+  #code up 500m squares
+  temp_df$m500 <- NA
+  temp_df$m500<-ifelse(temp_df$e001<=4 & temp_df$n001<=4, 'SW', temp_df$m500)
+  temp_df$m500<-ifelse(temp_df$e001<=4 & temp_df$n001>4, 'NW', temp_df$m500)
+  temp_df$m500<-ifelse(temp_df$e001>4 & temp_df$n001>4, 'NE', temp_df$m500)
+  temp_df$m500<-ifelse(temp_df$e001>4 & temp_df$n001<=4, 'SE', temp_df$m500)
   
   #code tetrad grid
   temp_df$let<-NA
@@ -365,6 +373,7 @@ coordinates_to_gridref<-function(df, invar_e, invar_n, output_res, region) {
   
   
   #produce grid refs
+  if(output_res ==   0.5) temp_df$grid_ref <- paste0(temp_df$hundref, temp_df$e10, temp_df$e1, temp_df$n10, temp_df$n1, temp_df$m500)
   if(output_res ==   1) temp_df$grid_ref <- paste0(temp_df$hundref, temp_df$e10, temp_df$e1, temp_df$n10, temp_df$n1)
   if(output_res ==   2) temp_df$grid_ref <- paste0(temp_df$hundref, temp_df$e10, temp_df$n10, temp_df$let)
   if(output_res ==  10) temp_df$grid_ref <- paste0(temp_df$hundref, temp_df$e10, temp_df$n10)
