@@ -7,7 +7,7 @@
 create_grid_for_object(
   sp_object,
   grid_resolution,
-  clip2object = TRUE,
+  clip_tolerance = 0,
   region = NULL
 )
 }
@@ -16,7 +16,7 @@ create_grid_for_object(
 
 \item{grid_resolution}{= the resolution in metres of the desired grid}
 
-\item{clip2object}{= bool, should squares with no overlap be removed?}
+\item{clip_tolerance}{= numeric, the minimum overlap (sq metres) between a grid cell and sp_object for the cell to be retained}
 
 \item{region}{= One of GB (=Great Britain), I (=Ireland) or CH (=Channel Islands)}
 }

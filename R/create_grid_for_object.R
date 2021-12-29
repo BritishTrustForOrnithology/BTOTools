@@ -6,14 +6,14 @@
 #' interest. Optionally limit the grid to cells overlapping sp_object.
 #' @param sp_object = the polygon for which the grid is needed
 #' @param grid_resolution = the resolution in metres of the desired grid
-#' @param clip2object = bool, should squares with no overlap be removed?
+#' @param clip_tolerance = numeric, the minimum overlap (sq metres) between a grid cell and sp_object for the cell to be retained
 #' @param region = One of GB (=Great Britain), I (=Ireland) or CH (=Channel Islands)
 #' @return An sf object
 #' 
 #' @import sf
 #' 
 #' @export
-create_grid_for_object <- function(sp_object, grid_resolution, clip2object = TRUE, region = NULL) {
+create_grid_for_object <- function(sp_object, grid_resolution, clip_tolerance = 0, region = NULL) {
   if(is.null(region)) stop('Region must be defined as one of GB, I or CH')
   if(!region %in% c('GB','I','CH')) stop('Region should be one of GB, I or CH')
   
@@ -53,36 +53,36 @@ create_grid_for_object <- function(sp_object, grid_resolution, clip2object = TRU
   #sometimes the geometry data is created but named x. If so, rename it
   if(attr(grid, "sf_column") != 'geometry') grid <- rename_geometry(grid)
   
-  #optionally remove squares that do not overlap GB
-  if(clip2object == TRUE) {
-    #intersect with the object to remove any squares with no overlap
-    sp_object$keep <- 1
-    grid <- st_join(grid, sp_object, join = st_intersects)
-    grid <- subset(grid, !is.na(keep))
-    grid$keep <- NULL
-  }
-  
   # #get centroid of each square
-  # cent <- st_centroid(grid)
-  # 
-  # #extract the geometry and convert to grid reference
-  # cent_df <- as.data.frame(st_coordinates(cent), stringsAsFactors = FALSE)
-  # squares <- coordinates_to_gridref(df = cent_df, invar_e = 'X', invar_n = 'Y', output_res = grid_resolution/1000)
-  # squares$grid_ref <- as.character(squares$grid_ref)
+  cent <- st_centroid(grid)
   
-  #calculate tenkm (briefly) to obtain segref and quadrefs
-  # squares$tenkm <- substr(squares$grid_ref,1,4)
-  # squares <- rescale_10km_to_20km(df = squares, invar = 'tenkm')
-  # squares <- rescale_10km_to_50km(df = squares, invar = 'tenkm')
-  # squares$tenkm <- NULL
+  #extract the geometry and convert to grid reference
+  cent_df <- as.data.frame(st_coordinates(cent), stringsAsFactors = FALSE)
+  squares <- coordinates_to_gridref(df = cent_df, invar_e = 'X', invar_n = 'Y', output_res = grid_resolution/1000, region = region)
+  squares$grid_ref <- as.character(squares$grid_ref)
   
   #bind the square info to the grid
-  # grid <- sf:::cbind.sf(grid, squares)
+  grid <- sf:::cbind.sf(grid, squares)
   
-  # names(grid)[which(names(grid) == 'grid_ref')] <- outvarname
-  # grid$area_square <- NULL
-  # grid$area_overlap <- NULL
-  # grid$percentoverlap <- NULL
+  #if tolerance has been set remove grid squares with less overlap area
+  if(clip_tolerance > 0) {
+    grid$area_square <- as.numeric(st_area(grid$geometry))
+    #only retain grids that have at least 1% overlap
+    fragareas <- sf::st_intersection(sp_object, grid)
+    fragareas$area_overlap <- as.numeric(st_area(fragareas$geometry))
+    fragareas <- aggregate(data = fragareas, area_overlap ~ grid_ref, sum)
+    grid <- merge(grid, fragareas, by = 'grid_ref')
+    #retain squares with too little overlap area
+    grid <- subset(grid, area_overlap >= clip_tolerance)
+    # grid$percentoverlap <- grid$area_overlap  / grid$area_square
+    # grid <- subset(grid, percentoverlap >= 0.01)
+    grid$area_square <- NULL
+    grid$area_overlap <- NULL
+  }
+  
+  names(grid)[which(names(grid) == 'grid_ref')] <- outvarname
+  grid$X <- NULL
+  grid$Y <- NULL
   
   return(grid)  
 }
