@@ -29,3 +29,12 @@ Added new dataset (speccode_mapping) and associated function (update_speccodes()
 ## Update 11/08/2021
 
 A minor update to replace the embedded global_species_lookup and sciname_synonyms datasets to include the latest IOC version 11.2 species names and order. Also includes a new function (get_species_info()) to query species information given a name or code.
+
+## Update 11/01/2022
+
+Three improvements in this update:
+
+* coordinates_to_gridref() and gridref_to_coordinates now work in Ireland and Channel Islands as well as in GB. For coordinates_to_gridref it is now necessary to add a *region* parameter to the function call to specify on which grid system (GB, I or CH) the coordinates originate. 
+* create_grid_for_object - this is a (beta) function to create a grid of squares of desired resolution for a spatial object. e.g. if you have a county and want all 1-km squares overlapping the county, this function aims to create such a grid
+
+* rename_geometry - a helper function needed inside create_grid_for_object to deal with instances where the geometry field of a simple features object is misnamed
