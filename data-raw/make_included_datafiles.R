@@ -46,7 +46,18 @@ global_species_lookup <- global_species_lookup[,c(1:8,11,9,10)]
 #check the encoding of an accented character
 #subset(global_species_lookup, master_taxon_id == 405)
 
+#******************
+#TEMPORARY - include the additional European 5-letter codes I have created
+europe5 <- read.csv('data-raw/europe 5-letter codes.csv', stringsAsFactors = FALSE)
+europe5 <- subset(europe5, select = c('master_taxon_id', 'code5ltr'))
+names(europe5)[2] <- 'newcode5'
+
+global_species_lookup <- merge(global_species_lookup, europe5, by = 'master_taxon_id', all = TRUE)
+global_species_lookup$code5ltr <- ifelse(is.na(global_species_lookup$code5ltr) & !is.na(global_species_lookup$newcode5), global_species_lookup$newcode5, global_species_lookup$code5ltr)
+global_species_lookup$newcode5 <- NULL
+
 #output
+#******************
 use_data(global_species_lookup, overwrite = TRUE)
 
 #' make coordinates datasets
