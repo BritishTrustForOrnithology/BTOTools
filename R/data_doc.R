@@ -1,7 +1,7 @@
 #' Species dictionary lookup
 #'
 #' Common names, scientific names, two-letter codes, five-letter codes, sort order and taxonomic rank for birds, 
-#' mammals and various inverts. Bird names as used in IOC version 11.2, last updated August 2021.
+#' mammals and various inverts. Bird names as used in IOC version 12.1, last updated February 2022.
 #'
 #' @name global_species_lookup
 #' @docType data
@@ -26,7 +26,7 @@ NULL
 #' Species' scientific name synonyms
 #'
 #' A list of previously used scientific names and their currently used synonym, to assist in updating taxonomy 
-#' of old data files. Bird names as used in IOC version IOC version 11.2, last updated August 2021.
+#' of old data files. Bird names as used in IOC version IOC version 12.1, last updated February 2022.
 #'
 #' @name sciname_synonyms
 #' @docType data
@@ -139,8 +139,8 @@ NULL
 #' However, older archived files (e.g. those for BirdAtlas 2007-11 and earlier ) still have the old species code 
 #' encoding. For example Cattle Egret will be represented in old files as speccode = 35 whereas to match with 
 #' new species dictionary information this needs to be updated to 52121. This file provides the necessary lookup
-#' and can be used in conjunction with the BTOTools update_speccode() function. Based on  IOC version 11.2, 
-#' last updated August 2021
+#' and can be used in conjunction with the BTOTools update_speccode() function. Based on  IOC version 12.1, 
+#' last updated February 2022.
 #'
 #' @name speccode_mapping
 #' @docType data

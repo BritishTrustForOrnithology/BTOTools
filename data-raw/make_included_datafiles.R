@@ -80,9 +80,10 @@ names(speccode_mapping) <- tolower(names(speccode_mapping))
 speccode_mapping$mapping_id <- NULL
 names(speccode_mapping)[1] <- 'old_species_code'
 #per Andy M, need to filter as follows for B&I data
-speccode_mapping <- subset(speccode_mapping, british_isles =='Y' & (is.na(match_type) | match_type == 'I'))
+speccode_mapping <- subset(speccode_mapping, british_isles =='Y')
 speccode_mapping$british_isles <- NULL
-speccode_mapping$match_type <- NULL
+speccode_mapping$location_criteria <- NULL
+speccode_mapping$country_list <- NULL
 head(speccode_mapping)
 #output
 use_data(speccode_mapping, overwrite = TRUE)
