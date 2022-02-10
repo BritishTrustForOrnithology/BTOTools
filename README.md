@@ -38,3 +38,7 @@ Three improvements in this update:
 * create_grid_for_object - this is a (beta) function to create a grid of squares of desired resolution for a spatial object. e.g. if you have a county and want all 1-km squares overlapping the county, this function aims to create such a grid
 
 * rename_geometry - a helper function needed inside create_grid_for_object to deal with instances where the geometry field of a simple features object is misnamed
+
+## Update 10/02/2022
+
+A minor update to replace the embedded global_species_lookup and sciname_synonyms datasets to include the latest IOC version 12.1 species names and order. 
