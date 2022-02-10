@@ -27,8 +27,9 @@ subset(sciname_synonyms, current_sci_name == 'Poecile montanus')
 #sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(23, 'Hydrobates leucorhous', 'Oceanodroma leucorhoa')
 sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(433, 'Parus montanus', 'Poecile montanus')
 sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(436, 'Parus caeruleus', 'Cyanistes caeruleus')
+sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(355, 'Saxicola torquatus', 'Saxicola rubicola')
+sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(349, 'Cyanecula svecica', 'Luscinia sveciva')
 sciname_synonyms <- sciname_synonyms[order(sciname_synonyms$master_taxon_id),]
-
 #output
 use_data(sciname_synonyms, overwrite = TRUE)
 
