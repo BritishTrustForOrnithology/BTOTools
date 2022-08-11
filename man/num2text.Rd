@@ -19,6 +19,12 @@ num2text(x, unit = NULL, st = FALSE)
 \description{
 Convert numbers to text and pluralise units on demand.
 }
+\details{
+This function is designed for use in RMarkdown notebooks and handles conversion 
+of numbers below 10 to words. It also handles whether numbers should be presented as 
+words at the start of a sentence   function also capitalise if needed for start of 
+sentence. And lastly it handles display of the verb or units as singular or plural.
+}
 \examples{
 num2text(x = 7, unit = 'species', st = FALSE) 
 num2text(x = 81, unit = 'tetrad', st = TRUE) 
