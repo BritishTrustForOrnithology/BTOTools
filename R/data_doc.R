@@ -14,10 +14,10 @@
 #'   \item{character}{taxon_rank_name = Taxonomic rank of entity}
 #'   \item{numeric}{sort_order = Sort order under IOC}
 #'   \item{character}{alt_int_name = Species' common name as used internationally (e.g. with Eurasian prefix)}
-#'   \item{character}{cbc_code = two-letter code if exists. To be depracated in future issue. Use code2ltr}
 #'   \item{character}{code2ltr = two-letter code if exists. To be used in preference to cbc_code}
-#'   \item{character}{code5ltr = five-letter code as used in demography, if exists}
-#'   \item{numeric}{code2ltr = Euring code if exists}
+#'   \item{character}{code5ltr = five-letter code, if exists}
+#'   \item{numeric}{euring = Euring number if exists}
+#'   \item{character}{taxa} = Common name of species group (e.g. Birds, Butterflies, Reptiles)
 #' }
 #' @references IOC
 #' @keywords data

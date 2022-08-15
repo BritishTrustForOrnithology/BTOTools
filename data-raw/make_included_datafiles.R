@@ -36,18 +36,19 @@ use_data(sciname_synonyms, overwrite = TRUE)
 
 #' dataframe of species names for all birds (globally) plus selected UK mammals, herps, inverts
 global_species_lookup <- read.csv('data-raw/global_species_lookup_IOC12_1.csv', 
-                                  colClasses = c('numeric', rep('character', 2), 'numeric', 'character','numeric', 'character', 'character', 'character', 'numeric' ), encoding = 'latin1', na.strings = "")
+                                  colClasses = c('numeric', rep('character', 2), 'numeric', 'character','numeric', 'character', 'character', 'character', 'numeric', 'character' ), encoding = 'latin1', na.strings = "")
 names(global_species_lookup) <- tolower(names(global_species_lookup))
+names(global_species_lookup)[8] <- 'code2ltr'
 names(global_species_lookup)[9] <- 'code5ltr'
 names(global_species_lookup)[10] <- 'euring'
-global_species_lookup$code2ltr <- global_species_lookup$cbc_code
-global_species_lookup <- global_species_lookup[,c(1:8,11,9,10)]
+
+#global_species_lookup <- global_species_lookup[,c(1:8,11,9,10)]
 # head(global_species_lookup)
 # str(global_species_lookup)
 #check the encoding of an accented character
 #subset(global_species_lookup, master_taxon_id == 405)
 
-#******************
+# ******************
 #TEMPORARY - include the additional European 5-letter codes I have created
 europe5 <- read.csv('data-raw/europe 5-letter codes.csv', stringsAsFactors = FALSE)
 europe5 <- subset(europe5, select = c('master_taxon_id', 'code5ltr'))
@@ -58,7 +59,7 @@ global_species_lookup$code5ltr <- ifelse(is.na(global_species_lookup$code5ltr) &
 global_species_lookup$newcode5 <- NULL
 
 #output
-#******************
+# ******************
 use_data(global_species_lookup, overwrite = TRUE)
 
 #' make coordinates datasets
