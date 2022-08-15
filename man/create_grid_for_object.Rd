@@ -24,7 +24,7 @@ create_grid_for_object(
 \item{outvarname}{= string, name for the exported grid reference column (e.g. 'tetrad_id')}
 }
 \value{
-An sf object
+An sf object with columns for grid reference, and the centroid coordinates of each grid cell.
 }
 \description{
 Create a grid of a given resolution for a polygon.

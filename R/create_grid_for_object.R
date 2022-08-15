@@ -10,7 +10,7 @@
 #' @param region = One of GB (=Great Britain), I (=Ireland) or CH (=Channel Islands)
 #' @param outvarname = string, name for the exported grid reference column (e.g. 'tetrad_id')
 #' 
-#' @return An sf object
+#' @return An sf object with columns for grid reference, and the centroid coordinates of each grid cell.
 #' 
 #' @import sf
 #' 
@@ -55,7 +55,7 @@ create_grid_for_object <- function(sp_object, grid_resolution, clip_tolerance = 
   #sometimes the geometry data is created but named x. If so, rename it
   if(attr(grid, "sf_column") != 'geometry') grid <- rename_geometry(grid)
   
-  # #get centroid of each square
+  #get centroid of each square
   cent <- st_centroid(grid)
   
   #extract the geometry and convert to grid reference
@@ -83,6 +83,8 @@ create_grid_for_object <- function(sp_object, grid_resolution, clip_tolerance = 
   }
   
   names(grid)[which(names(grid) == 'grid_ref')] <- outvarname
+  grid$centroid_x <- grid$X
+  grid$centroid_y <- grid$Y
   grid$X <- NULL
   grid$Y <- NULL
   
