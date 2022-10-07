@@ -5,7 +5,7 @@
 \alias{global_species_lookup}
 \title{Species dictionary lookup}
 \format{
-A data.frame with 34051 rows and eight columns
+A data.frame with 34051 rows and 11 columns
 \describe{
   \item{numeric}{master_taxon_id = Numeric taxon key code}
   \item{character}{scientific_name = Species' scientific name}

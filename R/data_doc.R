@@ -6,7 +6,7 @@
 #'
 #' @name global_species_lookup
 #' @docType data
-#' @format A data.frame with 34051 rows and eight columns
+#' @format A data.frame with 34051 rows and 11 columns
 #' \describe{
 #'   \item{numeric}{master_taxon_id = Numeric taxon key code}
 #'   \item{character}{scientific_name = Species' scientific name}
