@@ -2,7 +2,7 @@ library(devtools)
 #' dataframe of species scientific name synonyms
 
 #' read the old scientific names with their matched new names
-sciname_synonyms <- read.csv('data-raw/sci_name_synonyms_IOC12_1.csv', 
+sciname_synonyms <- read.csv('data-raw/sci_name_synonyms_IOC12_2.csv', 
                              colClasses = c('numeric','character','numeric', 'character', 'character','numeric', 'character','numeric'),
                              encoding = 'latin1')
 names(sciname_synonyms) <- tolower(names(sciname_synonyms))
@@ -19,24 +19,28 @@ sciname_synonyms$sort_order_ioc <- NULL
 sciname_synonyms <- subset(sciname_synonyms, master_taxon_id != 0)
 sciname_synonyms <- subset(sciname_synonyms, alternative_sci_name != 'n/a')
 
-head(sciname_synonyms)
+#check for some old changes that appear to be missing
 subset(sciname_synonyms, current_sci_name == 'Hydrobates leucorhous')
 subset(sciname_synonyms, current_sci_name == 'Poecile montanus')
+subset(sciname_synonyms, current_sci_name == 'Cyanistes caeruleus')
+subset(sciname_synonyms, current_sci_name == 'Saxicola rubicola')
+subset(sciname_synonyms, current_sci_name == 'Luscinia svecica')
+
 
 #add a couple of manual entries (use list instead of c to prevent class changes)
 #sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(23, 'Hydrobates leucorhous', 'Oceanodroma leucorhoa')
 sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(433, 'Parus montanus', 'Poecile montanus')
 sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(436, 'Parus caeruleus', 'Cyanistes caeruleus')
 sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(355, 'Saxicola torquatus', 'Saxicola rubicola')
-sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(349, 'Cyanecula svecica', 'Luscinia sveciva')
+sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(349, 'Cyanecula svecica', 'Luscinia svecica')
 sciname_synonyms <- sciname_synonyms[order(sciname_synonyms$master_taxon_id),]
 #output
 use_data(sciname_synonyms, overwrite = TRUE)
 
 
 #' dataframe of species names for all birds (globally) plus selected UK mammals, herps, inverts
-global_species_lookup <- read.csv('data-raw/global_species_lookup_IOC12_1.csv', 
-                                  colClasses = c('numeric', rep('character', 2), 'numeric', 'character','numeric', 'character', 'character', 'character', 'numeric', 'character' ), encoding = 'latin1', na.strings = "")
+global_species_lookup <- read.csv('data-raw/global_species_lookup_IOC12_2.csv', 
+                                  colClasses = c('numeric', rep('character', 2), 'numeric', 'character','numeric', 'character', 'character', 'character', 'numeric', 'character' ), encoding = 'utf8', na.strings = "")
 names(global_species_lookup) <- tolower(names(global_species_lookup))
 names(global_species_lookup)[8] <- 'code2ltr'
 names(global_species_lookup)[9] <- 'code5ltr'
@@ -50,13 +54,13 @@ names(global_species_lookup)[10] <- 'euring'
 
 # ******************
 #TEMPORARY - include the additional European 5-letter codes I have created
-europe5 <- read.csv('data-raw/europe 5-letter codes.csv', stringsAsFactors = FALSE)
-europe5 <- subset(europe5, select = c('master_taxon_id', 'code5ltr'))
-names(europe5)[2] <- 'newcode5'
+#europe5 <- read.csv('data-raw/europe 5-letter codes.csv', stringsAsFactors = FALSE)
+#europe5 <- subset(europe5, select = c('master_taxon_id', 'code5ltr'))
+#names(europe5)[2] <- 'newcode5'
 
-global_species_lookup <- merge(global_species_lookup, europe5, by = 'master_taxon_id', all = TRUE)
-global_species_lookup$code5ltr <- ifelse(is.na(global_species_lookup$code5ltr) & !is.na(global_species_lookup$newcode5), global_species_lookup$newcode5, global_species_lookup$code5ltr)
-global_species_lookup$newcode5 <- NULL
+#global_species_lookup <- merge(global_species_lookup, europe5, by = 'master_taxon_id', all = TRUE)
+#global_species_lookup$code5ltr <- ifelse(is.na(global_species_lookup$code5ltr) & !is.na(global_species_lookup$newcode5), global_species_lookup$newcode5, global_species_lookup$code5ltr)
+#global_species_lookup$newcode5 <- NULL
 
 #output
 # ******************
@@ -85,7 +89,7 @@ use_data(landarea010, overwrite = TRUE)
 
 
 #' lookup to update old speccode (from BirdAtlas era and before)
-speccode_mapping <- read.table('data-raw/species_map_IOC73_to_IOC12_1.csv', 
+speccode_mapping <- read.table('data-raw/species_map_IOC73_to_IOC12_2.csv', 
                                sep = ',', 
                                header = TRUE, 
                                colClasses = c(rep('numeric',3), rep('character',3)), na.strings = c(''))
