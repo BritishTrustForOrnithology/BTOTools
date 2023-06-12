@@ -217,7 +217,7 @@ gridref_to_coordinates<-function(df, invar_gridref) {
   }
   
   #join them all back together
-  temp_df_errors$region <- NA
+  if(nrow(temp_df_errors)>0) temp_df_errors$region <- NA #add region column to errors df otherwise won't bind
   temp_done <- rbind(temp_df_errors, temp_df4, temp_df5, temp_df6, temp_df8)
   temp_done <- temp_done[order(temp_done$order),]
   temp_done$order <- NULL
