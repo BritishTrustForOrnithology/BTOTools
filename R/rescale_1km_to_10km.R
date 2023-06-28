@@ -26,7 +26,7 @@ rescale_1km_to_10km<-function(df,invar) {
   invar.index<-which(names(df)== invar)
   
   #check if any values in the column are not 1-km refs
-  nc <- nchar(df[,invar.index])
+  nc <- nchar(df[[invar.index]])
   short <- min(nc, na.rm = TRUE)
   long <- max(nc, na.rm = TRUE)
   if(short < 6) stop('invar contains grid references that are too short')
