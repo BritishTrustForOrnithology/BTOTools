@@ -32,6 +32,6 @@ rescale_1km_to_10km<-function(df,invar) {
   if(short < 6) stop('invar contains grid references that are too short')
   if(long > 6) stop('invar contains grid references that are too long')
   
-  df$tenkm<-paste(substr(df[,invar.index],1,3),substr(df[,invar.index],5,5),sep=''  )
+  df$tenkm<-paste(substr(df[[invar.index]],1,3),substr(df[[invar.index]],5,5),sep=''  )
   return(df)
 }
