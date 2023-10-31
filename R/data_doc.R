@@ -2,11 +2,11 @@
 #'
 #' Common names, scientific names, two-letter codes, five-letter codes, sort order and taxonomic rank for birds, 
 #' mammals and various inverts. Now with 5-letter codes for all European breeding birds. Bird names as used in 
-#' IOC version 12.2, last updated October 2022.
+#' IOC version 12.2, last updated October 2023.
 #'
 #' @name global_species_lookup
 #' @docType data
-#' @format A data.frame with 34051 rows and 11 columns
+#' @format A data.frame with 34290 rows and 11 columns
 #' \describe{
 #'   \item{numeric}{master_taxon_id = Numeric taxon key code}
 #'   \item{character}{scientific_name = Species' scientific name}
@@ -27,11 +27,11 @@ NULL
 #' Species' scientific name synonyms
 #'
 #' A list of previously used scientific names and their currently used synonym, to assist in updating taxonomy 
-#' of old data files. Bird names as used in IOC version IOC version 12.2, last updated October 2022.
+#' of old data files. Bird names as used in IOC version IOC version 13.2, last updated October 2023.
 #'
 #' @name sciname_synonyms
 #' @docType data
-#' @format A data.frame with 3087 rows and 4 columns
+#' @format A data.frame with 2337 rows and 4 columns
 #' \describe{
 #'   \item{numeric}{Numeric taxon key code}
 #'   \item{character}{Formerly used scientific name}
@@ -140,12 +140,12 @@ NULL
 #' However, older archived files (e.g. those for BirdAtlas 2007-11 and earlier ) still have the old species code 
 #' encoding. For example Cattle Egret will be represented in old files as speccode = 35 whereas to match with 
 #' new species dictionary information this needs to be updated to 52121. This file provides the necessary lookup
-#' and can be used in conjunction with the BTOTools update_speccode() function. Based on  IOC version 12.2, 
-#' last updated October 2022.
+#' and can be used in conjunction with the BTOTools update_speccode() function. Based on  IOC version 13.2, 
+#' last updated October 2023.
 #'
 #' @name speccode_mapping
 #' @docType data
-#' @format A data.frame with 462 rows and two columns
+#' @format A data.frame with 403 rows and two columns
 #' \describe{
 #'   \item{numeric}{old_species_code = Numeric speceies code as used in older archived files}
 #'   \item{numeric}{new_species_code = Numeric speceies code as used currently in Oracle etc}

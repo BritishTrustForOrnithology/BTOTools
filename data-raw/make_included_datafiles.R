@@ -2,7 +2,7 @@ library(devtools)
 #' dataframe of species scientific name synonyms
 
 #' read the old scientific names with their matched new names
-sciname_synonyms <- read.csv('data-raw/sci_name_synonyms_IOC12_2.csv', 
+sciname_synonyms <- read.csv('data-raw/sci_name_synonyms_IOC13_2.csv', 
                              colClasses = c('numeric','character','numeric', 'character', 'character','numeric', 'character','numeric'),
                              encoding = 'latin1')
 names(sciname_synonyms) <- tolower(names(sciname_synonyms))
@@ -39,7 +39,7 @@ use_data(sciname_synonyms, overwrite = TRUE)
 
 
 #' dataframe of species names for all birds (globally) plus selected UK mammals, herps, inverts
-global_species_lookup <- read.csv('data-raw/global_species_lookup_IOC12_2.csv', 
+global_species_lookup <- read.csv('data-raw/global_species_lookup_IOC13_2.csv', 
                                   colClasses = c('numeric', rep('character', 2), 'numeric', 'character','numeric', 'character', 'character', 'character', 'numeric', 'character' ), encoding = 'utf8', na.strings = "")
 names(global_species_lookup) <- tolower(names(global_species_lookup))
 names(global_species_lookup)[8] <- 'code2ltr'
@@ -89,7 +89,7 @@ use_data(landarea010, overwrite = TRUE)
 
 
 #' lookup to update old speccode (from BirdAtlas era and before)
-speccode_mapping <- read.table('data-raw/species_map_IOC73_to_IOC12_2.csv', 
+speccode_mapping <- read.table('data-raw/species_map_IOC73_to_IOC13_2.csv', 
                                sep = ',', 
                                header = TRUE, 
                                colClasses = c(rep('numeric',3), rep('character',3)), na.strings = c(''))

@@ -5,7 +5,7 @@
 \alias{sciname_synonyms}
 \title{Species' scientific name synonyms}
 \format{
-A data.frame with 3087 rows and 4 columns
+A data.frame with 2337 rows and 4 columns
 \describe{
   \item{numeric}{Numeric taxon key code}
   \item{character}{Formerly used scientific name}
@@ -14,6 +14,6 @@ A data.frame with 3087 rows and 4 columns
 }
 \description{
 A list of previously used scientific names and their currently used synonym, to assist in updating taxonomy 
-of old data files. Bird names as used in IOC version IOC version 12.2, last updated October 2022.
+of old data files. Bird names as used in IOC version IOC version 13.2, last updated October 2023.
 }
 \keyword{data}

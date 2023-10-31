@@ -5,7 +5,7 @@
 \alias{global_species_lookup}
 \title{Species dictionary lookup}
 \format{
-A data.frame with 34051 rows and 11 columns
+A data.frame with 34290 rows and 11 columns
 \describe{
   \item{numeric}{master_taxon_id = Numeric taxon key code}
   \item{character}{scientific_name = Species' scientific name}
@@ -23,7 +23,7 @@ A data.frame with 34051 rows and 11 columns
 \description{
 Common names, scientific names, two-letter codes, five-letter codes, sort order and taxonomic rank for birds, 
 mammals and various inverts. Now with 5-letter codes for all European breeding birds. Bird names as used in 
-IOC version 12.2, last updated October 2022.
+IOC version 12.2, last updated October 2023.
 }
 \references{
 IOC
