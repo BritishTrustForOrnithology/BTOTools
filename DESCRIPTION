@@ -1,7 +1,7 @@
 Package: BTOTools
 Type: Package
 Title: A Package To Access and Manipulate BTO data
-Version: 0.1.3
+Version: 0.1.4
 Author: Simon Gillings <simon.gillings@bto.org>
 Maintainer: Simon Gillings <simon.gillings@bto.org>
 Description: Access and manipulate archived BTO data.
