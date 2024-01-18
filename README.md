@@ -15,6 +15,10 @@ devtools::install_github('BritishTrustForOrnithology/BTOTools', build_vignettes 
 
 # Versions
 
+## Update 18/01/2024 (version 0.1.5)
+
+A minor update to add lists of 1-km squares for each country, and a list of 10-km squares assigned to dominant country based on land area. data can be accessed by e.g. data('squares_01km_wales')
+
 ## Update 31/10/2023 (version 0.1.4)
 
 A minor update to replace the embedded global_species_lookup and sciname_synonyms datasets to include the latest IOC version 13.2 species names and order.
