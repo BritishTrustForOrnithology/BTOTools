@@ -152,3 +152,110 @@ NULL
 #' }
 #' @keywords data
 NULL
+
+
+#' 1-km squares in England
+#' 
+#' List of 1-km squares with land in England (see also lists for other countries. 
+#' A square is listed for a country if it contains any land. Therefore, individual 
+#' squares can be present in more than one list if they fall on a country border. 
+#' Lists are based on low tide shapefiles so include some sand flats. Includes 
+#' Isle of Man but not Channel Islands.
+#' 
+#' @name squares_01km_england
+#' @docType data
+#' @format A data.frame with 142562 rows and two columns
+#' \describe{
+#'   \item{character}{onekm = 1-km grid reference}
+#'   \item{character}{country = country name}
+#' }
+#' @keywords data
+NULL
+
+#' 1-km squares in Scotland
+#' 
+#' List of 1-km squares with land in Scotland (see also lists for other countries. 
+#' A square is listed for a country if it contains any land. Therefore, individual 
+#' squares can be present in more than one list if they fall on a country border. 
+#' Lists are based on low tide shapefiles so include some sand flats.
+#' 
+#' @name squares_01km_scotland
+#' @docType data
+#' @format A data.frame with 102797 rows and two columns
+#' \describe{
+#'   \item{character}{onekm = 1-km grid reference}
+#'   \item{character}{country = country name}
+#' }
+#' @keywords data
+NULL
+
+#' 1-km squares in Wales
+#' 
+#' List of 1-km squares with land in Wales (see also lists for other countries. 
+#' A square is listed for a country if it contains any land. Therefore, individual 
+#' squares can be present in more than one list if they fall on a country border. 
+#' Lists are based on low tide shapefiles so include some sand flats.
+#' 
+#' @name squares_01km_wales
+#' @docType data
+#' @format A data.frame with 24867 rows and two columns
+#' \describe{
+#'   \item{character}{onekm = 1-km grid reference}
+#'   \item{character}{country = country name}
+#' }
+#' @keywords data
+NULL
+
+#' 1-km squares in Northern Ireland
+#' 
+#' List of 1-km squares with land in Northern Ireland (see also lists for other countries. 
+#' A square is listed for a country if it contains any land. Therefore, individual 
+#' squares can be present in more than one list if they fall on a country border. 
+#' Lists are based on low tide shapefiles so include some sand flats.
+#' 
+#' @name squares_01km_northernireland
+#' @docType data
+#' @format A data.frame with 16102 rows and two columns
+#' \describe{
+#'   \item{character}{onekm = 1-km grid reference}
+#'   \item{character}{country = country name}
+#' }
+#' @keywords data
+NULL
+
+#' 1-km squares in Republic of Ireland
+#' 
+#' List of 1-km squares with land in Republic of Ireland (see also lists for other countries. 
+#' A square is listed for a country if it contains any land. Therefore, individual 
+#' squares can be present in more than one list if they fall on a country border. 
+#' Lists are based on low tide shapefiles so include some sand flats.
+#' 
+#' @name squares_01km_republicofireland
+#' @docType data
+#' @format A data.frame with 81513 rows and two columns
+#' \describe{
+#'   \item{character}{onekm = 1-km grid reference}
+#'   \item{character}{country = country name}
+#' }
+#' @keywords data
+NULL
+
+#' 10-km squares assigned to dominant country
+#' 
+#' List of 10-km squares with land in Britain and Ireland where each square is 
+#' assigned to a single country based on dominant land area in the square. 
+#' Therefore, individual squares should be present in only one country.
+#' Lists are based on low tide shapefiles so include some sand flats. Includes 
+#' Isle of Man (assigned England) but not Channel Islands.
+#' 
+#' @name squares_10km_dominant_country
+#' @docType data
+#' @format A data.frame with 4154 rows and two columns
+#' \describe{
+#'   \item{character}{country = country name}
+#'   \item{character}{tenkm = 10-km grid reference}
+#' }
+#' @keywords data
+NULL
+
+
