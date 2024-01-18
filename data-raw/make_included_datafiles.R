@@ -104,3 +104,31 @@ speccode_mapping$country_list <- NULL
 head(speccode_mapping)
 #output
 use_data(speccode_mapping, overwrite = TRUE)
+
+
+#' lists of 1-km squares by country
+squares_01km_england <- read.csv('data-raw/01km_england.csv')
+squares_01km_england$country <- 'England'
+use_data(squares_01km_england, overwrite = TRUE)
+
+squares_01km_wales <- read.csv('data-raw/01km_wales.csv')
+squares_01km_wales$country <- 'Wales'
+use_data(squares_01km_wales, overwrite = TRUE)
+
+squares_01km_scotland <- read.csv('data-raw/01km_scotland.csv')
+squares_01km_scotland$country <- 'Scotland'
+use_data(squares_01km_scotland, overwrite = TRUE)
+
+squares_01km_northernireland <- read.csv('data-raw/01km_northernireland.csv')
+squares_01km_northernireland$country <- 'Northern Ireland'
+use_data(squares_01km_northernireland, overwrite = TRUE)
+
+squares_01km_republicofireland <- read.csv('data-raw/01km_republicofireland.csv')
+squares_01km_republicofireland$country <- 'Republic of Ireland'
+use_data(squares_01km_republicofireland, overwrite = TRUE)
+
+#' list of 10-km squares by dominant country
+squares_10km_dominant_country <- read.csv('data-raw/10km_dominant_country.csv')
+use_data(squares_10km_dominant_country, overwrite = TRUE)
+
+
