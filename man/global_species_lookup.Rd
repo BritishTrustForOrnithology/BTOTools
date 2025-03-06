@@ -16,14 +16,16 @@ A data.frame with 34290 rows and 11 columns
   \item{character}{alt_int_name = Species' common name as used internationally (e.g. with Eurasian prefix)}
   \item{character}{code2ltr = two-letter code if exists. To be used in preference to cbc_code}
   \item{character}{code5ltr = five-letter code, if exists}
+  \item{character}{pipeline_code = six-letter code, if exists, for ultrasonic vocalising taxa covered by the Acoustic Pipeline, e.g. Pippip}
   \item{numeric}{euring = Euring number if exists}
+  \item{numeric}{parent_species_mti = master_taxon_id for the parent species (identical if taxon is a species). Enables 'rolling up' of subspecies records to their parent species}
   \item{character}{taxa} = Common name of species group (e.g. Birds, Butterflies, Reptiles)
 }
 }
 \description{
 Common names, scientific names, two-letter codes, five-letter codes, sort order and taxonomic rank for birds, 
 mammals and various inverts. Now with 5-letter codes for all European breeding birds. Bird names as used in 
-IOC version 12.2, last updated October 2023.
+IOC version 14.2, last updated March 2024.
 }
 \references{
 IOC

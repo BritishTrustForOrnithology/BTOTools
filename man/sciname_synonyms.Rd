@@ -14,6 +14,6 @@ A data.frame with 2337 rows and 4 columns
 }
 \description{
 A list of previously used scientific names and their currently used synonym, to assist in updating taxonomy 
-of old data files. Bird names as used in IOC version IOC version 13.2, last updated October 2023.
+of old data files. Bird names as used in IOC version IOC version 14.2, last updated March 2024.
 }
 \keyword{data}
