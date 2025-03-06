@@ -49,9 +49,19 @@ get_species_info <- function(field, value) {
   }
   
   #search on 5-letter code name  
-  if(field == '5ltr') {
-    if(!is.character(value)) stop('For search on 5-letter code, value must be character')
-    if(nchar(value) != 5) stop('For search on 5-letter code, value must be a 5 character string. Remember trailing dots for short names, e.g. "WREN."')
+  if( field == '5ltr' ) {
+    if( !is.character(value) ) 
+      stop('For search on 5-letter code, value must be character')
+    value <- toupper(value)
+    if( nchar(value) != 5 ){
+      code.short <- c("COOT", "JAY", "KNOT", "ROOK", "RUFF", "SHAG", "SMEW", "SORA", "TEAL", "WREN")
+      code.long <- c("COOT.", "JAY..", "KNOT.", "ROOK.", "RUFF.", "SHAG.", "SMEW.", "SORA.", "TEAL.", "WREN.")
+      code.valid <- match(value, code.short)
+      if( is.na(code.valid) )
+        stop(paste(value, 'is not a valid 5 letter code'))
+      else
+        value <- code.long[code.valid]
+      }
     temp <- subset(global_species_lookup, code5ltr == value)
   }
   
