@@ -76,7 +76,7 @@ use_data(landarea010, overwrite = TRUE)
 
 
 #' lookup to update old speccode (from BirdAtlas era and before)
-speccode_mapping <- read.table('data-raw/species_map_IOC73_to_IOC13_2.csv', 
+speccode_mapping <- read.table('data-raw/species_map_IOC73_to_IOC14_2.csv', 
                                sep = ',', 
                                header = TRUE, 
                                colClasses = c(rep('numeric',3), rep('character',3)), na.strings = c(''))
@@ -89,8 +89,15 @@ speccode_mapping$british_isles <- NULL
 speccode_mapping$location_criteria <- NULL
 speccode_mapping$country_list <- NULL
 head(speccode_mapping)
+
+#add a row for Red Grouse update
+addrg <- data.frame(old_species_code = 125, 
+           new_species_code = 50734)
+
+speccode_mapping <- rbind(speccode_mapping, addrg)
+
 #output
-use_data(speccode_mapping, overwrite = TRUE)
+usethis::use_data(speccode_mapping, overwrite = TRUE)
 
 
 #' lists of 1-km squares by country
