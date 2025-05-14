@@ -91,10 +91,15 @@ speccode_mapping$country_list <- NULL
 head(speccode_mapping)
 
 #add a row for Red Grouse update
-addrg <- data.frame(old_species_code = 125, 
-           new_species_code = 50734)
-
-speccode_mapping <- rbind(speccode_mapping, addrg)
+testrg <- subset(speccode_mapping, old_species_code==125)
+if(nrow(testrg)==0) {
+  cat('adding red grouse\n')
+  addrg <- data.frame(old_species_code = 125, 
+             new_species_code = 50734)
+  
+  speccode_mapping <- rbind(speccode_mapping, addrg)
+  
+}
 
 #output
 usethis::use_data(speccode_mapping, overwrite = TRUE)
