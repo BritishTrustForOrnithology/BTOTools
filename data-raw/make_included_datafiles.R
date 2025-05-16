@@ -48,7 +48,7 @@ global_species_lookup <- read.csv('data-raw/global_species_lookup_IOC14_2.csv',
 names(global_species_lookup) <- tolower(names(global_species_lookup))
 names(global_species_lookup)[which(names(global_species_lookup)=='cbc_code')] <- 'code2ltr'
 names(global_species_lookup)[which(names(global_species_lookup)=='five_letter')] <- 'code5ltr'
-names(global_species_lookup)[which(names(global_species_lookup)=='cbc_code')] <- 'euring'
+names(global_species_lookup)[which(names(global_species_lookup)=='euring_no')] <- 'euring'
 
 #output
 # ******************
