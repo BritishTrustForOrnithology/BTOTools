@@ -1,4 +1,5 @@
 library(devtools)
+library(usethis)
 #' dataframe of species scientific name synonyms
 
 #' read the old scientific names with their matched new names
@@ -38,20 +39,20 @@ sciname_synonyms[NROW(sciname_synonyms) + 1,] <- list(349, 'Cyanecula svecica', 
 #reorder
 sciname_synonyms <- sciname_synonyms[order(sciname_synonyms$master_taxon_id),]
 #output
-use_data(sciname_synonyms, overwrite = TRUE)
+usethis::use_data(sciname_synonyms, overwrite = TRUE)
 
 
 #' dataframe of species names for all birds (globally) plus selected UK mammals, herps, inverts
 global_species_lookup <- read.csv('data-raw/global_species_lookup_IOC14_2.csv', 
                                   colClasses = c('numeric', rep('character', 2), 'numeric', 'character','numeric', 'character', 'character', 'character', 'character', 'numeric', 'numeric','character' ), encoding = 'utf8', na.strings = "")
 names(global_species_lookup) <- tolower(names(global_species_lookup))
-names(global_species_lookup)[8] <- 'code2ltr'
-names(global_species_lookup)[9] <- 'code5ltr'
-names(global_species_lookup)[11] <- 'euring'
+names(global_species_lookup)[which(names(global_species_lookup)=='cbc_code')] <- 'code2ltr'
+names(global_species_lookup)[which(names(global_species_lookup)=='five_letter')] <- 'code5ltr'
+names(global_species_lookup)[which(names(global_species_lookup)=='cbc_code')] <- 'euring'
 
 #output
 # ******************
-use_data(global_species_lookup, overwrite = TRUE)
+usethis::use_data(global_species_lookup, overwrite = TRUE)
 
 #' make coordinates datasets
 centroids002 <- read.table('data-raw/002km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "character", "numeric", "numeric"))
@@ -63,16 +64,16 @@ centroids050 <- read.table('data-raw/050km_xy_coords.csv', sep = ",", header = T
 centroids100 <- read.table('data-raw/100km_xy_coords.csv', sep = ",", header = T, colClasses = c("character", "numeric", "numeric"), na.strings = '')
 names(centroids100)[1] <- 'hundref'
 #output
-use_data(centroids002, overwrite = TRUE)
-use_data(centroids010, overwrite = TRUE)
-use_data(centroids020, overwrite = TRUE)
-use_data(centroids050, overwrite = TRUE)
-use_data(centroids100, overwrite = TRUE)
+usethis::use_data(centroids002, overwrite = TRUE)
+usethis::use_data(centroids010, overwrite = TRUE)
+usethis::use_data(centroids020, overwrite = TRUE)
+usethis::use_data(centroids050, overwrite = TRUE)
+usethis::use_data(centroids100, overwrite = TRUE)
 
 
 #' make land area dataset
 landarea010 <- read.table('data-raw/BI010_area_above_low_tide_line.csv', sep = ",", header = T, colClasses = c("character", "numeric"))
-use_data(landarea010, overwrite = TRUE)
+usethis::use_data(landarea010, overwrite = TRUE)
 
 
 #' lookup to update old speccode (from BirdAtlas era and before)
@@ -108,26 +109,26 @@ usethis::use_data(speccode_mapping, overwrite = TRUE)
 #' lists of 1-km squares by country
 squares_01km_england <- read.csv('data-raw/01km_england.csv')
 squares_01km_england$country <- 'England'
-use_data(squares_01km_england, overwrite = TRUE)
+usethis::use_data(squares_01km_england, overwrite = TRUE)
 
 squares_01km_wales <- read.csv('data-raw/01km_wales.csv')
 squares_01km_wales$country <- 'Wales'
-use_data(squares_01km_wales, overwrite = TRUE)
+usethis::use_data(squares_01km_wales, overwrite = TRUE)
 
 squares_01km_scotland <- read.csv('data-raw/01km_scotland.csv')
 squares_01km_scotland$country <- 'Scotland'
-use_data(squares_01km_scotland, overwrite = TRUE)
+usethis::use_data(squares_01km_scotland, overwrite = TRUE)
 
 squares_01km_northernireland <- read.csv('data-raw/01km_northernireland.csv')
 squares_01km_northernireland$country <- 'Northern Ireland'
-use_data(squares_01km_northernireland, overwrite = TRUE)
+usethis::use_data(squares_01km_northernireland, overwrite = TRUE)
 
 squares_01km_republicofireland <- read.csv('data-raw/01km_republicofireland.csv')
 squares_01km_republicofireland$country <- 'Republic of Ireland'
-use_data(squares_01km_republicofireland, overwrite = TRUE)
+usethis::use_data(squares_01km_republicofireland, overwrite = TRUE)
 
 #' list of 10-km squares by dominant country
 squares_10km_dominant_country <- read.csv('data-raw/10km_dominant_country.csv')
-use_data(squares_10km_dominant_country, overwrite = TRUE)
+usethis::use_data(squares_10km_dominant_country, overwrite = TRUE)
 
 
