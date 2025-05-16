@@ -15,6 +15,10 @@ devtools::install_github('BritishTrustForOrnithology/BTOTools', build_vignettes 
 
 # Versions
 
+## Update 16/05/2025
+
+Minor update to fix duplicated species entry for Natterjack Toad.
+
 ## Update 06/03/2025 (version 0.1.6)
 
 A minor update to upgrade the inbuilt species dictionary to IOC 14.2. Note the global_species_lookup now also includes two additional columns: i) pipeline_code contains the 6-letter codes used for bats and other ultrasonic vocalising species in the Acoustic Pipeline and ii) parent_species_mti which contains the 'parent' master_taxon_id of a taxon. This is most useful when 'rolling up' subspecies records to their parent species.
