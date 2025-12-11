@@ -22,7 +22,7 @@
 #'
 #' @export
 #'
-coordinates_to_gridref<-function(df, invar_e, invar_n, output_res, region = 'GB') {
+coordinates_to_gridref<-function(df, invar_e, invar_n, output_res, region = region) {
   #check input parameters
   if(!is.data.frame(df)) stop('df must be a data frame')
   if(is.null(region)) stop('Region must be defined as one of GB, I or CH')
