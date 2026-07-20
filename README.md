@@ -15,8 +15,8 @@ devtools::install_github('BritishTrustForOrnithology/BTOTools', build_vignettes 
 
 # Versions
 
-## Update 20/07/2026
-
+## Update 20/07/2026 (version 0.2.0)
+Feature update that adds check_birdtrends_dataset() (check_trends_scheme_validity.R), a user-facing function that checks structure and formatting of datasets meant for use within the Trends Explorer. The list of accepted values for Trends can be viewed and edited in trends_accepted_values.R.
 
 ## Update 16/05/2025
 
