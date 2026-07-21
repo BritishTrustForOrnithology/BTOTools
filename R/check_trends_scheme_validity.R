@@ -33,7 +33,7 @@
 #' check_birdtrends_dataset("data/BBS")
 #' check_birdtrends_dataset("data/BBS/metadata_2000 BBS.csv")
 #' 
-#' @param path Path to single .csv dataset, or folder containing .csv datasets
+#' @param path Path to single .csv dataset, or folder containing .csv datasets. If a single dataset is passed in, some checks will halt script execution if failed, but this won't happen if a folder is passed in.
 #' @return None
 #' 
 #' @import dplyr
@@ -504,6 +504,4 @@ check_filename <- function(filename) {
   
   
 }
-
-
 

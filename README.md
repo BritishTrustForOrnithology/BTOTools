@@ -1,21 +1,25 @@
 # BTOTools
+
 A package for manipulating BTO datasets
 
-Remember that if you want to install this directly from Github using devtools::install_github you will first need to create a Personal Access Token. Basic instructions are:
+Remember that if you want to install this directly from Github you will first need to create a Personal Access Token. Basic instructions are:
 
-* Go to https://github.com/settings/tokens
-* Generate a new token, call it devtools and tick repo to define its scope
-* Before navigating away be sure to copy the token as it will not be shown again (if you forget you’ll need to delete this one and make a new one)
-* Now go to R and add the token to the .Renviron file. The easiest way is to use usethis::edit_r_environ() (you may need to install the usethis package)
-* Using this command opens the .Renviron file for editing. Add the following line, substituting your token code, followed by two carriage returns. Then save the file, close it and restart R:
-GITHUB_PAT=blahblahblahblahblahblahblahblahblahblahblahblah
+-   Go to <https://github.com/settings/tokens>
+-   Generate a new token, call it devtools and tick repo to define its scope
+-   Before navigating away be sure to copy the token as it will not be shown again (if you forget you’ll need to delete this one and make a new one)
+-   Now go to R and add the token to the .Renviron file. One way is to use `usethis::edit_r_environ()` (you may need to install the usethis package)
+-   Using this command opens the .Renviron file for editing. Add the following line, substituting your token code, followed by two carriage returns. Then save the file, close it and restart R: GITHUB_PAT=blahblahblahblahblahblahblahblahblahblahblahblah
+-   Another way is to use `gitcreds::gitcreds_set()`, which will prompt you within the terminal to enter your PAT token. The set token can be viewed with `gitcreds::gitcreds_get()`, and the token can be checked with `usethis::gh_token_help()`.
+-   It's recommended to stick with one method for updating tokens to make token renewal simpler, since `gitcreds::gitcreds_set()` and `usethis::edit_r_environ()` store PAT tokens in different areas.
 
-Once you’ve done this you can install the package directly:
-devtools::install_github('BritishTrustForOrnithology/BTOTools', build_vignettes = TRUE)
+Once you’ve done this you can install the package directly: `devtools::install_github('BritishTrustForOrnithology/BTOTools', build_vignettes = TRUE)`
+
+Or: `pak::pkg_install("BritishTrustForOrnithology/BTOTools")` - this command will also automatically install/upgrade dependencies needed
 
 # Versions
 
 ## Update 20/07/2026 (version 0.2.0)
+
 Feature update that adds check_birdtrends_dataset() (check_trends_scheme_validity.R), a user-facing function that checks structure and formatting of datasets meant for use within the Trends Explorer. The list of accepted values for Trends can be viewed and edited in trends_accepted_values.R.
 
 ## Update 16/05/2025
@@ -36,16 +40,17 @@ A minor update to replace the embedded global_species_lookup and sciname_synonym
 
 ## Update 10/02/2022
 
-A minor update to replace the embedded global_species_lookup and sciname_synonyms datasets to include the latest IOC version 12.1 species names and order. 
+A minor update to replace the embedded global_species_lookup and sciname_synonyms datasets to include the latest IOC version 12.1 species names and order.
 
 ## Update 11/01/2022
 
 Three improvements in this update:
 
-* coordinates_to_gridref() and gridref_to_coordinates now work in Ireland and Channel Islands as well as in GB. For coordinates_to_gridref it is now necessary to add a *region* parameter to the function call to specify on which grid system (GB, I or CH) the coordinates originate. 
-* create_grid_for_object - this is a (beta) function to create a grid of squares of desired resolution for a spatial object. e.g. if you have a county and want all 1-km squares overlapping the county, this function aims to create such a grid
+-   coordinates_to_gridref() and gridref_to_coordinates now work in Ireland and Channel Islands as well as in GB. For coordinates_to_gridref it is now necessary to add a *region* parameter to the function call to specify on which grid system (GB, I or CH) the coordinates originate.
 
-* rename_geometry - a helper function needed inside create_grid_for_object to deal with instances where the geometry field of a simple features object is misnamed
+-   create_grid_for_object - this is a (beta) function to create a grid of squares of desired resolution for a spatial object. e.g. if you have a county and want all 1-km squares overlapping the county, this function aims to create such a grid
+
+-   rename_geometry - a helper function needed inside create_grid_for_object to deal with instances where the geometry field of a simple features object is misnamed
 
 ## Update 11/08/2021
 
@@ -61,8 +66,4 @@ A minor update to include Euring code in the embedded global_species_lookup.
 
 ## Update 08/06/2020
 
-A minor update to replace the embedded global_species_lookup and sciname_synonyms datasets to include the latest IOC version 10.1 species names and order. Also added is 5-letter codes as used in demography (ringing and NRS). Consequently I have included new variables code2ltr and code5ltr. cbc_code is retained for backwards compatibility but recommend using code2ltr hereafter. 
-
-
-
-
+A minor update to replace the embedded global_species_lookup and sciname_synonyms datasets to include the latest IOC version 10.1 species names and order. Also added is 5-letter codes as used in demography (ringing and NRS). Consequently I have included new variables code2ltr and code5ltr. cbc_code is retained for backwards compatibility but recommend using code2ltr hereafter.
