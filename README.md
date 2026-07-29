@@ -7,14 +7,23 @@ Remember that if you want to install this directly from Github you will first ne
 -   Go to <https://github.com/settings/tokens>
 -   Generate a new token, call it devtools and tick repo to define its scope
 -   Before navigating away be sure to copy the token as it will not be shown again (if you forget you’ll need to delete this one and make a new one)
--   Now go to R and add the token to the .Renviron file. One way is to use `usethis::edit_r_environ()` (you may need to install the usethis package)
--   Using this command opens the .Renviron file for editing. Add the following line, substituting your token code, followed by two carriage returns. Then save the file, close it and restart R: GITHUB_PAT=blahblahblahblahblahblahblahblahblahblahblahblah
+-   Now go to R and add the token to the .Renviron file. One way is to use `usethis::edit_r_environ()` (you may need to install the usethis package). Using this command opens the .Renviron file for editing. Add the following line, substituting your token code, followed by two carriage returns. Then save the file, close it and restart R: GITHUB_PAT=blahblahblahblahblahblahblahblahblahblahblahblah
 -   Another way is to use `gitcreds::gitcreds_set()`, which will prompt you within the terminal to enter your PAT token. The set token can be viewed with `gitcreds::gitcreds_get()`, and the token can be checked with `usethis::gh_token_help()`.
 -   It's recommended to stick with one method for updating tokens to make token renewal simpler, since `gitcreds::gitcreds_set()` and `usethis::edit_r_environ()` store PAT tokens in different areas.
 
-Once you’ve done this you can install the package directly: `devtools::install_github('BritishTrustForOrnithology/BTOTools', build_vignettes = TRUE)`
+Once you’ve done this you can install the package directly:
 
-Or: `pak::pkg_install("BritishTrustForOrnithology/BTOTools")` - this command will also automatically install/upgrade dependencies needed
+``` r
+devtools::install_github('BritishTrustForOrnithology/BTOTools', build_vignettes = TRUE)
+```
+
+Or:
+
+``` r
+pak::pkg_install("BritishTrustForOrnithology/BTOTools")
+```
+
+pak::pkg_install is recommended as it will also automatically install/upgrade dependencies needed. The same command can also be used to upgrade BTOTools.
 
 # Versions
 
