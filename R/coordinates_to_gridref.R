@@ -385,7 +385,7 @@ coordinates_to_gridref<-function(df, invar_e, invar_n, output_res, region = regi
   temp_df$grid_ref <- ifelse(is.na(temp_df$hundref), NA, temp_df$grid_ref)
   
   #check if any NAs returned and send warning
-  if(anyNA(temp_df$grid_ref)) warning('NAs were returned; indicates at least one record was outside the British Naitonal Grid')
+  if(anyNA(temp_df$grid_ref)) warning('NAs were returned; indicates at least one record was outside the British National Grid')
   
   #check df and temp_df still same length
   if(nrow(df) != nrow(temp_df)) stop('processed list not same length as original df')

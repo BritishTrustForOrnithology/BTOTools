@@ -45,7 +45,7 @@ rescale_1km_to_10km(temp1,'onekm')
 
 ##Centroids for mapping
 
-For producing simple dot maps the package includes datasets containing the British National Grid coordinates of the centroids of various grids. Although the coordinates are on the British Naitonal Grid, the datasets include Irish squares. Note also that coordinates for the Channel Isles squares have been shifted to a position south of Ireland for mapping purposes (as used in Bird Atlas maps). In a future release this will be made optional.
+For producing simple dot maps the package includes datasets containing the British National Grid coordinates of the centroids of various grids. Although the coordinates are on the British National Grid, the datasets include Irish squares. Note also that coordinates for the Channel Isles squares have been shifted to a position south of Ireland for mapping purposes (as used in Bird Atlas maps). In a future release this will be made optional.
 
 ```{r, fig.show='hold'}
 library(BTOTools)
